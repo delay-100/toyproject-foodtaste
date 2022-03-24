@@ -1,0 +1,33 @@
+{
+  "name": "foodtaste-withfriend",
+  "version": "1.0.0",
+  "description": "Test your food tastes with your friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delay-100/toyproject-foodtaste.git"
+  },
+  "author": "delay100",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delay-100/toyproject-foodtaste/issues"
+  },
+  "homepage": "https://github.com/delay-100/toyproject-foodtaste#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nunjucks": "^3.2.3",
+    "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
