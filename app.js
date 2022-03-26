@@ -1,0 +1,75 @@
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const nunjucks = require('nunjucks');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const indexRouter = require('./router/index');
+
+const { sequelize } = require('./models');
+
+const app = express();
+
+app.set('port', process.env.PORT || 8000);
+
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+    express: app,
+    watch: true,
+});
+
+Sequelize.sync({ force: false })
+    .then(() => {
+        console.log('데이터베이스 연결 성공');
+    })
+    .catch((err) => {
+        console.error(err);
+});
+
+app.use(morgan('dev'));
+
+// static
+app.use(express.static(path.join(__dirname, 'public')));
+
+// body-parser
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+// express-session, 인수: session에 대한 설정
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+}));
+
+// 라우터 연결
+app.use('/', indexRouter);
+
+// 라우터가 없을 때 실행 
+app.use((req,res,next)=>{
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
+});
+
+// 에러
+app.use((err, req, res, next) => {
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.status(err.status || 500);
+    res.render('error'); 
+})
+
+app.listen(app.get('port'), () => {
+    console.log(app.get('port'), '번 포트에서 대기 중');
+});
