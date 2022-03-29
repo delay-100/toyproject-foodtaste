@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const indexRouter = require('./router/index');
+const authRouter = require('./router/auth');
 
 const { sequelize } = require('./models');
 
@@ -22,7 +23,7 @@ nunjucks.configure('views', {
     watch: true,
 });
 
-Sequelize.sync({ force: false })
+sequelize.sync({ force: false })
     .then(() => {
         console.log('데이터베이스 연결 성공');
     })
@@ -54,6 +55,7 @@ app.use(session({
 
 // 라우터 연결
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 // 라우터가 없을 때 실행 
 app.use((req,res,next)=>{
