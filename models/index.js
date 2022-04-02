@@ -3,11 +3,8 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
 
 const User = require('./user');
-
-const Koreanfood = require('./koreanfood');
-const Chinesefood = require('./chinesefood');
-const Japanesefood = require('./japanesefood');
-const Westernfood = require('./westernfood');
+const Food = require('./food');
+const Select = require('./select');
 
 const db = {};
 
@@ -17,19 +14,17 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 db.User = User;
-db.Koreanfood = Koreanfood;
-db.Chinesefood = Chinesefood;
-db.Japanesefood = Japanesefood;
-db.Westernfood = Westernfood;
+db.Food = Food;
+db.Select = Select;
 
 // 각 객체 실행
 User.init(sequelize);
-Koreanfood.init(sequelize);
-Chinesefood.init(sequelize);
-Japanesefood.init(sequelize);
-Westernfood.init(sequelize);
+Food.init(sequelize);
+Select.init(sequelize);
 
 // 관계 연결
-// User.associate(db);
+User.associate(db);
+Food.associate(db);
+Select.associate(db);
 
 module.exports = db;
