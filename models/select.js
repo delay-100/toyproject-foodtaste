@@ -3,18 +3,13 @@ const Sequelize = require('sequelize');
 module.exports = class Select extends Sequelize.Model{
     static init (sequelize) {
         return super.init({
-            localId: {
-                type: Sequelize.STRING(20),
-                allowNull: false,
-                unique: true,
-            },
-            nick: {
-                type: Sequelize.STRING(8),
+            selected: {
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
                 unique: false,
             },
-            password: {
-                type: Sequelize.STRING(100),
+            notselected: {
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
             }
         }, { // super.init의 두 번째 인수: 테이블 자체에 대한 설정(테이블 옵션)
