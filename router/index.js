@@ -14,7 +14,7 @@ router.use((req, res, next) => {
   });
 
 router.get('/', (req, res) => {
-    res.render('index', { title: '음식 취향 %'});
+    res.render('index', { title: '음식취향 %'});
 });
 
 
