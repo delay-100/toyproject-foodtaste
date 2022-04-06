@@ -25,6 +25,8 @@ module.exports = class Select extends Sequelize.Model{
         });
     }
     static associate(db) {
-        
+        db.Select.belongsTo(db.User, { foreignKey: 'userSelected', targetKey: 'id'});
+        db.Select.belongsTo(db.Food, { foreignKey: 'foodSelected', targetKey: 'id'});
+  
     }
 }

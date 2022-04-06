@@ -29,6 +29,6 @@ module.exports = class User extends Sequelize.Model{
         });
     }
     static associate(db) {
-        
+        db.User.hasMany(db.Select, { foreignKey: 'userSelected', sourceKey: 'id'});
     }
 }

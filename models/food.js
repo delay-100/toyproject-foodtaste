@@ -25,6 +25,7 @@ module.exports = class Food extends Sequelize.Model{
         });
     }
     static associate(db) {
-        
+        db.Food.hasMany(db.Select, { foreignKey: 'foodSelected', sourceKey: 'id'});
+
     }
 }
