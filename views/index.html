@@ -2,8 +2,14 @@
 
 {% block content %}
     우히히..index.html임
+    {% if food and food.id %}
+        
     <div class="koreanfood-form">한식
-
+        <div>
+            {% if food.categoryname === "한식" %}   
+                {{food.name}}
+            {% endif %}
+        </div>
     </div>
     <div class="chinesefood-form">중식
         
@@ -14,4 +20,5 @@
     <div class="japanesefood-form">일식
         
     </div>
+    {% endif}
 {% endblock %}
