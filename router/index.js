@@ -17,6 +17,9 @@ router.get('/', (req, res) => {
     res.render('index', { title: '음식취향 %'});
 });
 
+router.get('/form', (req, res) => {
+  res.render('form', { title: '호불호 선택 폼'});
+});
 
 
 module.exports = router;
