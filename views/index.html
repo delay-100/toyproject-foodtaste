@@ -5,11 +5,11 @@
     {% if food and food.id %}
         
     <div class="koreanfood-form">한식
+         {% if food.categoryname === "한식" %}   
         <div>
-            {% if food.categoryname === "한식" %}   
                 {{food.name}}
-            {% endif %}
         </div>
+        {% endif %}
     </div>
     <div class="chinesefood-form">중식
         
