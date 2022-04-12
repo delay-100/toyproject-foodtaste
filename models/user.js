@@ -30,5 +30,16 @@ module.exports = class User extends Sequelize.Model{
     }
     static associate(db) {
         db.User.hasMany(db.Select, { foreignKey: 'userSelected', sourceKey: 'id'});
+        db.User.belongsToMany(db.User, { 
+            foreignKey: 'followingId', // user1에게 생기는 following
+            as: 'Followers', // 생성된 Follow라는 테이블을 이름을 바꿔서 가져옴 - user.getFollowers, user.getFollowings 같은 관계 메소드 사용 가능
+                            // include 시에도 as에 넣은 값을 넣으면 관계 쿼리가 작동함
+            through: 'Follow', // 생성할 테이블 이름 , 유저-테이블 -유저, 특정 유저의 팔로잉/팔로워 목록이 저장됨
+        });
+        db.User.belongsToMany(db.User, {
+            foreignKey: 'followerId', // user2에게 생기는 follower
+            as: 'Followings',
+            through: 'Follow', 
+        });
     }
 }

@@ -9,7 +9,7 @@ module.exports = class Food extends Sequelize.Model{
                 unique: true,
             },
             categorynumber: {
-                type: Sequelize.STRING(8),
+                type: Sequelize.INTEGER,
                 allowNull: false,
                 unique: false,
             },

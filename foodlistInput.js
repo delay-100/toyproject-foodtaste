@@ -10,11 +10,13 @@ const rl = readLine.createInterface({
     terminal: false
 });
 
-// 메뉴를 한 줄씩 출력
+// db 추가
 rl.on('line', function (text) {
- console.log(text);
-});
+    text = text.split(', ');
 
-// Food.create({
-//     name: foodlist.
-// })
+    Food.create({
+        name: text[0],
+        categorynumber: Number(text[1]),
+        categoryname: text[2],
+    });
+});

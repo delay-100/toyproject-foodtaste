@@ -9,8 +9,9 @@ const passport = require('passport');
 
 dotenv.config();
 
-const indexRouter = require('./router/index');
-const authRouter = require('./router/auth');
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
 
 const { sequelize } = require('./models');
 const passportConfig = require('./passport'); // passport/index.js
@@ -64,6 +65,7 @@ app.use(passport.session()); // req.session 객체에 passport 정보를 저장(
 // 라우터 연결
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 // 라우터가 없을 때 실행 
 app.use((req,res,next)=>{

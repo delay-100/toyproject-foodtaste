@@ -24,15 +24,15 @@ module.exports = () => {
         // console.log(111111111111111);
         User.findOne({
             where:{localId}, // db에 해당 id가 있는지 확인
-            // include: [{
-            //     model: User,
-            //     attributes: ['id', 'localId', 'nick'], // 속성을 id와 nick으로 지정함으로서, 실수로 비밀번호를 조회하는 것을 방지
-            //     // as: 'Followers',
-            // }, {
-            //     model: User,
-            //     attributes: ['id', 'localId', 'nick'],
-            //     // as: 'Followings',
-            // }],
+            include: [{
+                model: User,
+                attributes: ['id', 'localId', 'nick'], // 속성을 id와 nick으로 지정함으로서, 실수로 비밀번호를 조회하는 것을 방지
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'localId', 'nick'],
+                as: 'Followings',
+            }],
         }) 
         .then(user => done(null, user)) // req(요청).user에 저장 -> 앞으로 req.user을 통해 로그인한 사용자의 정보를 가져올 수 있음
         .catch(err => done(err));

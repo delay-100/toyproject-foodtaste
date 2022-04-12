@@ -3,12 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Select extends Sequelize.Model{
     static init (sequelize) {
         return super.init({
-            selected: {
+            like: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
                 unique: false,
             },
-            notselected: {
+            unlike: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
             }

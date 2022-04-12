@@ -2,23 +2,48 @@
 
 {% block content %}
     우히히..index.html임
-    {% if food and food.id %}
         
-    <div class="koreanfood-form">한식
-         {% if food.categoryname === '한식' %}
-        <div>
-            {{food.name}}
+    <div class="food-form">[한식]
+        
+    {% for food in foodlist %} 
+        {% if food and food.id %}
+
+        <div class="koreanfood-form">
+            {% if food.categorynumber === 1 %}
+            <div>
+
+                {{food.name}}
+            </div>
+            {% endif %}        
         </div>
+
+        {# <div class="chinesefood-form">  [중식]
+            {% if food.categorynumber === 2 %}
+            <div>
+                {{food.name}}
+            </div>
+            {% endif %}        
+        </div> #}
+        
+
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class="follower-list">
+        <h2>팔로잉 목록</h2>
+        {% if user.Followings %} 
+            {% for following in user.Followings %} 
+                <div>{{following.nick}}</div>
+            {% endfor %}
         {% endif %}
     </div>
-    <div class="chinesefood-form">중식
-        
-    </div>
-    <div class="westernfood-form">양식
-        
-    </div>
-    <div class="japanesefood-form">일식
-        
-    </div>
-    {% endif %}
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+
+    </script>
 {% endblock %}
