@@ -8,10 +8,6 @@ module.exports = class Select extends Sequelize.Model{
                 allowNull: false,
                 unique: false,
             },
-            unlike: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-            }
         }, {
              // super.init의 두 번째 인수: 테이블 자체에 대한 설정(테이블 옵션)
             sequelize, // static init 메서드의 매개변수와 연결되는 옵션, db.sequelize 객체를 넣어야 함 -> 추후에 models/index.js에서 연결

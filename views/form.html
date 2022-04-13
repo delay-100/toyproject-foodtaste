@@ -1,1 +1,26 @@
-// form.html임
+{% extends 'layout.html' %} 
+
+{% block content %}
+    <div class="food-form">  [ 한식 ]
+        <form id='food-form' action='/form/save' method='post'> 
+            {% for food in foodlist %} 
+                {% if food and food.id %}
+                    <div>
+                        {{loop.index}}  
+                        {{food.name}}         
+                        <label><input name="{{food.id}}" type="radio" value="t">호</label>
+                        <label><input name="{{food.id}}" type="radio" value="f">불호</label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <button id="submit-btn" type="submit" class="btn">저장하기</button> 
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

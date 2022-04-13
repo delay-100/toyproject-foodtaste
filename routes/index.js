@@ -1,7 +1,6 @@
 const express = require('express'); // node web framework
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares'); 
 const router = express.Router();
-const { Food } = require('../models');
 
 // 모든 요청마다 실행
 router.use((req, res, next) => {
@@ -14,30 +13,8 @@ router.use((req, res, next) => {
     next();
   });
 
-router.get('/', async (req, res, next) => {
-  try {
-    const foods = await Food.findAll({ // db에서 게시글을 조회 
-      order: [["createdAt", "DESC"]], // 게시글의 순서를 최신순으로 정렬
-    });
-    res.render('index', {
-      title: '음식취향 %',
-      foodlist: foods, // 조회 후 views/main.html 페이지를 렌더링할 때 전체 게시글을 twits 변수로 저장 
-    });
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
+router.get('/', (req, res, next) => {
+    res.render('index', { title: '음식취향 %'});
 });
-
-router.get('/form', (req, res) => {
-  res.render('form', { title: '호불호 선택 폼'});
-});
-
-// http://127.0.0.1:8000/profile 에 get요청이 왔을 때
-router.get("/profile", isLoggedIn, (req, res) => {
-  res.render("profile", { title: "내 정보 - sns" });
-});
-
-
 
 module.exports = router;

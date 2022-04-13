@@ -16,11 +16,13 @@
         </form>
         <div>
             <!-- 유저 정보 -->
-            <div>
+            <div>            
+                <a href="/" class="btn">메인 화면</a>
                 {% if user and user.localId %}
                 <div>
                     <div class="user-name">안녕하세용 {{user.nick}}님!</div>
-
+                    <a id="mypage" href="/mypage" class="btn">마이페이지</a>
+                    
                     <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
                 </div>
                 {% else %}
