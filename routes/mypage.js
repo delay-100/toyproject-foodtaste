@@ -2,16 +2,33 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 const { Food, Select } = require('../models');
+const { _assign } = require('nunjucks/src/lib');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
     try {
-      const foods = await Food.findAll({ // db에서 게시글을 조회 
-        order: [["createdAt", "DESC"]], // 게시글의 순서를 최신순으로 정렬
+      const foods = await Food.findAll({ 
+        order: [["createdAt", "DESC"]], 
       });
       const selects = await Select.findAll({  
         order: [["foodSelected", "asc"]], 
       });
-      res.render('mypage', { title: '마이페이지', foodlist: foods, select: selects });
+      const list = foods;
+
+      let k = 0;
+      for(let i=0; i< foods.length; i++){
+        for (let j=0; j<selects.length; j++){
+          if(list[i].id==selects[j].foodSelected){
+            list[i].dataValues.like = selects[j].like;
+            list[i].dataValues.userSelected = selects[j].userSelected;
+            k++;
+          }
+        }
+      }
+      // console.log(list[0]);
+
+      res.render('mypage', { title: '마이페이지', foodSelectlist: list,  });
+
+
     } catch (err) {
       console.error(err);
       next(err);

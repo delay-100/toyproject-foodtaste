@@ -8,14 +8,22 @@
     <div class="food-form"> 내가 선택한 음식들
         <div class="koreanfood-form"> [ 한식 ]
              <a id="form" href="/form/1" class="btn">선택하기</a>
-   
-            {% for food in foodlist %} 
-                {% if food and food.id and food.categorynumber == 1 %}
+              <a id="form" href="/remove/1" class="btn">삭제하기</a>
+            {% for foodSelect in foodSelectlist %}
+                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
                     <div>
-                        {{food.name}}    
-                        {% if select and select.id and select.userSelected == user.id and select.foodSelected == food.id %}
-                            {{select.like}}
+                        {{foodSelect.name}}
+                        {% if foodSelect.dataValues.userSelected === user.id %}
+                            {% if foodSelect.dataValues.like === true %}
+                                (호)
+                            {% else %}
+                                (불호)
+                            {% endif %}
                         {% endif %}    
+
+                        {# <script type="text/javascript">
+                             
+                        </script> #}
                     </div>
                 {% endif %}
             {% endfor %}
