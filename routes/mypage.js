@@ -2,15 +2,13 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 const { Food, Select } = require('../models');
-const { _assign } = require('nunjucks/src/lib');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
     try {
       const foods = await Food.findAll({ 
         order: [["createdAt", "DESC"]], 
       });
-      const selects = await Select.findAll({  
-        order: [["foodSelected", "asc"]], 
+      const selects = await Select.findAll({
       });
       const list = foods;
 
@@ -24,7 +22,10 @@ router.get('/', isLoggedIn, async (req, res, next) => {
           }
         }
       }
-      // console.log(list[0]);
+      if(selects.length!==0){
+        list.user = selects[0].userSelected;
+      }
+      // console.log(list);
 
       res.render('mypage', { title: '마이페이지', foodSelectlist: list,  });
 

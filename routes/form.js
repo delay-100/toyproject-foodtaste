@@ -66,5 +66,33 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         next(error);
     }
   });
+
+  router.post('/remove', isLoggedIn, async (req, res, next) => {
+    try{
+        const { selectUserid, userid, category }= req.body;
+        if(!selectUserid)return res.json({status:'false'});
+        if(selectUserid==userid){
+          const foods = await Food.findAll({
+            where:  {
+              categorynumber: category
+            },
+          });
+          for(let i=0; i<foods.length; i++){
+            await Select.destroy({
+              where:{
+                foodSelected: foods[i].id,
+              },
+            });
+          }
+        return res.json({status:'true'});
+        }
+        else{
+            return res.json({status:'not equal user'});
+        }
+    } catch(err){
+        console.error(err);
+    }
+    
+});
   
   module.exports = router;

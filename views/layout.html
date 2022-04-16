@@ -11,11 +11,10 @@
     </head>
     <body>
         <form id="userSearch-form" action="/userSearch">
-            <input type="text" name="userSearch" placeholder="아이디 입력"> {# req.query.hashtag #}
-            <button class="btn">검색</button>
+            <input type="text" name="userSearch" placeholder="닉네임 입력"> {# req.query.hashtag #}
+            <button class="btn" >팔로우</button>
         </form>
         <div>
-            <!-- 유저 정보 -->
             <div>            
                 <a href="/" class="btn">메인 화면</a>
                 {% if user and user.localId %}
@@ -54,6 +53,8 @@
                     alert(new URL(location.href).searchParams.get('loginError')); 
                 }
             };
+
+
         </script>
         {% block script %}
         {% endblock %}
