@@ -1,40 +1,42 @@
 const express = require('express'); 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
-const { Food, Select } = require('../models');
+const { Food, Select, User } = require('../models');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
-    try {
-      const foods = await Food.findAll({ 
-        order: [["createdAt", "DESC"]], 
-      });
-      const selects = await Select.findAll({
-      });
-      const list = foods;
+  try {
+    // console.log(req.user.id); // userid
 
-      let k = 0;
-      for(let i=0; i< foods.length; i++){
-        for (let j=0; j<selects.length; j++){
-          if(list[i].id==selects[j].foodSelected){
-            list[i].dataValues.like = selects[j].like;
-            list[i].dataValues.userSelected = selects[j].userSelected;
-            k++;
-          }
-        }
-      }
-      if(selects.length!==0){
-        list.user = selects[0].userSelected;
-      }
-      // console.log(list);
+    // 현재 로그인한 유저의 선택 정보를 가져옴
+    const myselects = await Select.findAll({
+      where: {
+        userSelected: req.user.id,
+      },
+      order: [
+        ["foodSelected", "asc"]
+      ],
+    });
 
-      res.render('mypage', { title: '마이페이지', foodSelectlist: list,  });
+    // 전체 food를 가져옴
+    const foods = await Food.findAll({ 
+      order: [
+        ["categorynumber", "asc"],
+        ["id", "asc"],
+      ],
+    });
 
 
-    } catch (err) {
-      console.error(err);
-      next(err);
-    }
-  });
+    const mylist = foods;
+
+    // foodlist: food 정보, myselectlist: 내 선택 정보, friendSelectlist: 팔로우의 선택 정보
+    res.render('mypage', { title: '마이페이지', myfoodSelectlist: mylist,  });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+
 
 router.get('/follow', isLoggedIn, (req, res) => {
     res.render('follow', { title: '팔로우, 팔로워 목록' });

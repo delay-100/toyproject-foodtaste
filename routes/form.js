@@ -27,6 +27,8 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
       const keylist = Object.keys(req.body).toString()
       const valuelist = Object.values(req.body).toString();
   
+      console.log(keylist);
+      console.log(valuelist);
       const list = [];
       let j = 0;
       let num = "";
@@ -42,11 +44,12 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
       }
       list[j] = num;
       
+      let z = 0;
       for(let i=0; i<list.length; i++) {
         console.log(parseInt(list[i],10));
-        console.log(valuelist[i]);
+        console.log(valuelist[z]);
   
-        if(valuelist[i]==='t'){
+        if(valuelist[z]==='t'){
           await Select.create({
               like: true,
               userSelected: req.user.id,
@@ -59,8 +62,9 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
               foodSelected: parseInt(list[i],10),
           });
         }
+        z+=2;
       }
-      res.redirect('/');
+      res.redirect('/mypage');
     } catch (error) {
         console.error(error);
         next(error);
@@ -78,6 +82,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
             },
           });
           for(let i=0; i<foods.length; i++){
+            // 지금 정보 다지우고있음,,(수정해야함)
             await Select.destroy({
               where:{
                 foodSelected: foods[i].id,
@@ -95,4 +100,4 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     
 });
   
-  module.exports = router;
+module.exports = router;

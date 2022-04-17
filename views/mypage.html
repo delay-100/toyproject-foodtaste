@@ -8,10 +8,10 @@
     <div class="food-form"> 내가 선택한 음식들
         <div class="koreanfood-form"> [ 한식 ]
             <a id="form" href="/form/1" class="btn">선택하기</a>
-            {% if user.id == foodSelectlist.user %}
-            <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+            {% if user.id == myfoodSelectlist.user %}
+            <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
             {% endif %}
-            {% for foodSelect in foodSelectlist %}
+            {% for foodSelect in myfoodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
                     <div>
                         {{foodSelect.name}}
@@ -28,10 +28,10 @@
         </div>
         <div class="koreanfood-form"> [ 중식 ]
             <a id="form" href="/form/1" class="btn">선택하기</a>
-            {% if user.id == foodSelectlist.user %}
-            <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+            {% if user.id == myfoodSelectlist.user %}
+            <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
             {% endif %}
-            {% for foodSelect in foodSelectlist %}
+            {% for foodSelect in myfoodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
                     <div>
                         {{foodSelect.name}}
@@ -83,7 +83,7 @@
                    location.reload();
                }
                else if(res.data.status==="not equal user"){
-                   alert(selectUserid+"님이 작성한 글이 아닙니다!");
+                   alert(selectUserid+"님의 정보가 아닙니다!");
                }
            })
        }
