@@ -17,8 +17,4 @@ router.get('/', (req, res, next) => {
     res.render('index', { title: '음식취향 %'});
 });
 
-router.get('/userSearch', (req, res, next) => {
-  
-});
-
 module.exports = router;
