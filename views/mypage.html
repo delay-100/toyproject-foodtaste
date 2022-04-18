@@ -3,20 +3,21 @@
 
 {% block content %}
 
-    <a id="follow" href="/mypage/follow" class="btn">팔로우/팔로잉</a>
+    <a id="follow" href="/mypage/follow" class="btn">팔로잉/팔로워</a>
     
     <div class="food-form"> 내가 선택한 음식들
         <div class="koreanfood-form"> [ 한식 ]
             <a id="form" href="/form/1" class="btn">선택하기</a>
             {% if user.id == myfoodSelectlist.user %}
-            <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+                <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
             {% endif %}
             {% for foodSelect in myfoodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
                     <div>
+                        {{loop.index}}  
                         {{foodSelect.name}}
-                        {% if foodSelect.dataValues.userSelected and foodSelect.dataValues.userSelected === user.id %}
-                            {% if foodSelect.dataValues.like and foodSelect.dataValues.like === true %}
+                        {% if foodSelect.userSelected and foodSelect.userSelected === user.id %}
+                            {% if foodSelect.like and foodSelect.like === true %}
                                 (호)
                             {% else %}
                                 (불호)
@@ -29,14 +30,15 @@
         <div class="koreanfood-form"> [ 중식 ]
             <a id="form" href="/form/2" class="btn">선택하기</a>
             {% if user.id == myfoodSelectlist.user %}
-            <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+            <div id="form-remove" onClick='removeSelect({{myfoodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</div> 
             {% endif %}
             {% for foodSelect in myfoodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
                     <div>
+                        {{loop.index}}  
                         {{foodSelect.name}}
-                        {% if foodSelect.dataValues.userSelected and foodSelect.dataValues.userSelected === user.id %}
-                            {% if foodSelect.dataValues.like and foodSelect.dataValues.like === true %}
+                        {% if foodSelect.userSelected and foodSelect.userSelected === user.id %}
+                            {% if foodSelect.like and foodSelect.like === true %}
                                 (호)
                             {% else %}
                                 (불호)
@@ -52,7 +54,30 @@
         <h2>팔로잉 목록</h2>
         {% if user.Followings %} 
             {% for following in user.Followings %} 
-                <div>{{following.nick}}</div>
+                <div>
+                    {{following.nick}}
+                    {% for list in followfoodSelectlist %} {# 유저 나누어줌 (아마도 제발) #}
+                        {# {% if list and foodSelect.categorynumber == 1 %} #}
+                            {% for foodSelect in list %} {# 푸드 각각을 나누어줌 #}
+                                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %} {# 카테고리 나눔#}
+                                    <div>
+                                        {{foodSelect.name}} 
+                                        {{following.id}} {# user가 following 하는 사람 #}
+                                        {{foodSelect.userSelected}} {# 해당 food를 선택한 user.id #}
+                                        {% if foodSelect.userSelected and foodSelect.userSelected === following.id %}
+                                            {% if foodSelect.like and foodSelect.like === true %}
+                                                (호)
+                                            {% else %}
+                                                (불호)
+                                            {% endif %}
+                                        {% endif %}    
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {# {% endif %} #}
+                    {% endfor %}
+
+                </div>
             {% endfor %}
         {% endif %}
     </div>
