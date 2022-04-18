@@ -3,6 +3,14 @@
 
 {% block content %}
 
+ {% if user and user.localId %}
+        <input id="my-nick" type="hidden" value="{{user.nick}}">
+        <div>
+            <input type="text" name="userFollow" id="followNick" placeholder="닉네임 입력"> {# req.query.hashtag #}
+            <button id="follow">팔로우</button>
+        </div>
+{% endif %}
+
     <a id="follow" href="/mypage/follow" class="btn">팔로잉/팔로워</a>
     
     <div class="food-form"> 내가 선택한 음식들
@@ -17,7 +25,7 @@
                         {{loop.index}}  
                         {{foodSelect.name}}
                         {% if foodSelect.userSelected and foodSelect.userSelected === user.id %}
-                            {% if foodSelect.like and foodSelect.like === true %}
+                            {% if foodSelect.like and foodSelect.like === 1 %}
                                 (호)
                             {% else %}
                                 (불호)
@@ -56,26 +64,25 @@
             {% for following in user.Followings %} 
                 <div>
                     {{following.nick}}
-                    {% for list in followfoodSelectlist %} {# 유저 나누어줌 (아마도 제발) #}
+                    {# {% for list in followfoodSelectlist %} 유저 나누어줌 (아마도 제발) #}
                         {# {% if list and foodSelect.categorynumber == 1 %} #}
-                            {% for foodSelect in list %} {# 푸드 각각을 나누어줌 #}
+                            {% for foodSelect in followfoodSelectlist %} {# 푸드 각각을 나누어줌 #}
                                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %} {# 카테고리 나눔#}
                                     <div>
                                         {{foodSelect.name}} 
-                                        {{following.id}} {# user가 following 하는 사람 #}
-                                        {{foodSelect.userSelected}} {# 해당 food를 선택한 user.id #}
-                                        {% if foodSelect.userSelected and foodSelect.userSelected === following.id %}
-                                            {% if foodSelect.like and foodSelect.like === true %}
-                                                (호)
+                                        {# {{following.id}} user가 following 하는 사람 #}
+                                        {% if following.id in foodSelect.userlike %}
+                                            {% if foodSelect.userlike[following.id]==1 %}
+                                                  (호)
                                             {% else %}
                                                 (불호)
                                             {% endif %}
-                                        {% endif %}    
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             {% endfor %}
                         {# {% endif %} #}
-                    {% endfor %}
+                    {# {% endfor %} #}
 
                 </div>
             {% endfor %}
@@ -112,6 +119,29 @@
                }
            })
        }
+
+       document.querySelector('#follow').addEventListener('click', function(e) {
+                    const myId = document.querySelector('#my-nick'); // myId는 현재 로그인한 사용자, layout.html에 있는 <input id="my-id" type="hidden" value="{{user.id}}">
+                    
+                    if(myId){
+                        const userNick = document.querySelector('#followNick').value; // parentNode는 "class=twit"임. 즉, 바로 위의 div를 뜻함
+                        if(userNick !== myId.value){
+                            if(confirm(userNick + '님을 팔로우하시겠습니까?')){
+                                axios.post(`user/follow/${userNick}`) // 입력된 닉네임
+                            .then(() =>{
+                                location.reload();
+                            })
+                            .catch((err)=>{
+                                console.error(err);
+                            }); 
+                        }
+                    }
+                    else{
+                        alert('본인은 팔로우 할 수 없습니다!');
+                    }
+                }
+        });
+
          {# async function modifyUser(){
            await axios.post(`/auth/modifyUser`,{
 

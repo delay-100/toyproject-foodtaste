@@ -82,14 +82,14 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
             },
           });
           for(let i=0; i<foods.length; i++){
-            // 지금 정보 다지우고있음,,(수정해야함)
             await Select.destroy({
               where:{
                 foodSelected: foods[i].id,
+                userSelected: userid,
               },
             });
           }
-        return res.json({status:'true'});
+          return res.json({status:'true'});
         }
         else{
             return res.json({status:'not equal user'});
