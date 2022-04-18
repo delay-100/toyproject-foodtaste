@@ -25,8 +25,21 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       ],
     });
 
-
     const mylist = foods;
+
+    // foods에다가 자신의 선택 정보를 넣음
+    for(let i=0; i<foods.length; i++) {
+      for(let j=0; j<myselects.length; j++) {
+        if(mylist[i].id==myselects[j].foodSelected){
+          mylist[i].dataValues.like = myselects[j].like;
+          mylist[i].dataValues.userSelected = myselects[j].userSelected;
+        }
+      }
+    }
+
+    if(myselects.length!==0){
+      mylist.user = req.user.id;
+    }
 
     // foodlist: food 정보, myselectlist: 내 선택 정보, friendSelectlist: 팔로우의 선택 정보
     res.render('mypage', { title: '마이페이지', myfoodSelectlist: mylist,  });
