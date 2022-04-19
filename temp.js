@@ -28,7 +28,6 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     });
  
     const mylist = foods;
-
     // foods에다가 자신의 선택 정보를 넣음
     for(let i=0; i<foods.length; i++) {
       for(let j=0; j<myselects.length; j++) {
@@ -42,20 +41,24 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       mylist.user = req.user.id;
     }
     
-    console.log(mylist);
-    const followinglist = [];
-    
+    // console.log(mylist);
+
+    const followingfoods = await Food.findAll({ 
+      raw: true,
+      order: [
+        ["categorynumber", "asc"],
+        ["id", "asc"],
+      ],
+    });
+ 
+    for(let i=0; i <foods.length; i++){ // 푸드 수 만큼 반복 
+      followingfoods[i].userlike = {};
+    }
+
     // follower의 선택 정보를 넣음, 0이면 실행x니까 list가 비어있음
-    for(let k=0; k<req.user.Followings.length; k++){
+    for(let k=0; k<req.user.Followings.length; k++){ //유저가 팔로우한 수한
       const followingID = req.user.Followings[k].id;
-      const followingfoods = await Food.findAll({ 
-        raw: true,
-        order: [
-          ["categorynumber", "asc"],
-          ["id", "asc"],
-        ],
-      });
-      const followingfood = followingfoods;
+      
       const followingselects = await Select.findAll({
         raw: true,
         where: {
@@ -65,26 +68,26 @@ router.get('/', isLoggedIn, async (req, res, next) => {
           ["foodSelected", "asc"]
         ],
       });
+
+
     // console.log(mylist);
-      for(let i=0; i<foods.length; i++) {
-        for(let j=0; j<followingselects.length; j++) {
-          if(followingfood[i].id==followingselects[j].foodSelected){
-            followingfood[i].like = followingselects[j].like;
-            followingfood[i].userSelected = followingselects[j].userSelected;
-          }
+      for(let i=0; i<foods.length; i++) { // 푸드 수 만ㄴ큼 반복
+       for(let j=0; j<followingselects.length; j++) { // DB level name = foodSelected
+        if(followingfoods[i].id==followingselects[j].foodSelected){
+          followingfoods[i].userlike[followingID] = followingselects[j].like;
+            // followingfood[i].like = followingselects[j].like;
+            // followingfood[i].userSelected = followingselects[j].userSelected;
+        }
         }
       }
-      if(followingselects.length!==0){
-        followingfood.user = followingID;
-      }
       // console.log("---------------------------------------------");
-      followinglist.push(followingfood);
+      // followinglist.push(followingfoods);
       
       // console.log(followingfood);
     }
-    // console.log(followinglist);
+    // console.log(followingfoods);
     // foodlist: food 정보, myselectlist: 내 선택 정보, friendSelectlist: 팔로우의 선택 정보
-    res.render('mypage', { title: '마이페이지', myfoodSelectlist: mylist, followfoodSelectlist: followinglist });
+    res.render('mypage', { title: '마이페이지', myfoodSelectlist: mylist, followfoodSelectlist: followingfoods });
   } catch (err) {
     console.error(err);
     next(err);
