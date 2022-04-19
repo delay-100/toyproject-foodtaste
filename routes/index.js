@@ -1,4 +1,5 @@
 const express = require('express'); // node web framework
+const { User } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares'); 
 const router = express.Router();
 
@@ -13,8 +14,14 @@ router.use((req, res, next) => {
     next();
   });
 
-router.get('/', (req, res, next) => {
-    res.render('index', { title: '음식취향 %'});
+router.get('/', async (req, res, next) => {
+    const howmanyId = await User.findOne({
+      raw: true,
+      order: [
+        ["createdAt", "desc"]
+      ],
+    });
+    res.render('index', { title: '음식취향 %', num: howmanyId.id});
 });
 
 module.exports = router;
