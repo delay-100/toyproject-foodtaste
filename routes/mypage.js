@@ -74,11 +74,14 @@ router.get('/', isLoggedIn, async (req, res, next) => {
 
       const dic = {};
 
-      let sameNum = 0;
-      for(let i=1; i<categorynumber+1; i++){
+      for(let i=1; i<categorynumber+1; i++){     
+        let sameNum = 0;
         for(j in foods){
+          // 푸드의 카테고리 별로
           if(foods[j].categorynumber==i){
-            if((foods[j].userlike[followingID]==1) && (foods[j].userlike[req.user.id]==1)){
+            // 사용자가 like이고 팔로잉이 like이거나 사용자가 0이고 팔로잉이 0인경우 num++ 
+            if((foods[j].userlike[followingID]==1 && foods[j].userlike[req.user.id]==1)||
+            (foods[j].userlike[followingID]==0 && foods[j].userlike[req.user.id]==0)){
               // console.log(foods[j]);
               sameNum=sameNum+1;
             }
@@ -99,7 +102,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     foods.user =req.user.id;
 
 
-    console.log(userpercent);
+    console.log(foods);
     // foodlist: food 정보, foodSelectlist: 각 user(자신, 팔로잉, 팔로워)의 food - 선택 정보
     res.render('mypage', { title: '마이페이지', foodSelectlist: foods, percentlist: userpercent });
   } catch (err) {

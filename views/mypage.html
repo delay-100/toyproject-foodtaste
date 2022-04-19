@@ -24,34 +24,34 @@
                     <div>
                         {{loop.index}}  
                         {{foodSelect.name}}
-                        {% if foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] === 1 %}
+                        {% if (user.id).toString() in foodSelect.userlike %}
+                            {% if foodSelect.userlike[user.id] == 1 %}
                                 (호)
                             {% else %}
                                 (불호)
                             {% endif %}
-                        {% endif %}    
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="chinese-form"> [ 중식 ]
-            <a id="form" href="/form/2" class="btn">선택하기</a>
+         <div class="chinesefood-form"> [ 중식 ]
+            <a id="form" href="/form/1" class="btn">선택하기</a>
             {% if user.id == foodSelectlist.user %}
                 <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</div> 
             {% endif %}
             {% for foodSelect in foodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
                     <div>
-                        {{loop.index}}
+                        {{loop.index}}  
                         {{foodSelect.name}}
-                        {% if foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] === 2 %}
+                        {% if (user.id).toString() in foodSelect.userlike %}
+                            {% if foodSelect.userlike[user.id] == 1 %}
                                 (호)
                             {% else %}
                                 (불호)
                             {% endif %}
-                        {% endif %}    
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}
@@ -67,11 +67,11 @@
                     <div class="following-percent">
                         {% for percent in percentlist %}
                             {% if percent.id==following.id %}
-                                {% if percent.categorypercent == 1 %}
-                                    
+                                {% if ('1' in percent.categorypercent) %}
+                                    {{ percent.categorypercent['1'] }}%
                                 {% endif %}
-                                {% if percent.categorypercent == 2 %}
-
+                                {% if ('2' in percent.categorypercent) %}
+                                    {{ percent.categorypercent['2'] }}%
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -83,9 +83,9 @@
                             {# {{following.id}} user가 following 하는 사람 #}
                             {% if following.id in foodSelect.userlike %}
                                 {% if foodSelect.userlike[following.id]==1 %}
-                                        (호)
+                                    (호)
                                 {% else %}
-                                    (불호)
+                                    (불호)       
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -96,7 +96,7 @@
                             {# {{following.id}} user가 following 하는 사람 #}
                             {% if following.id in foodSelect.userlike %}
                                 {% if foodSelect.userlike[following.id]==1 %}
-                                        (호)
+                                    (호)
                                 {% else %}
                                     (불호)
                                 {% endif %}
