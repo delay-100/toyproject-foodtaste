@@ -15,9 +15,13 @@
     
     <div class="food-form"> 내가 선택한 음식들
         <div class="koreanfood-form"> [ 한식 ]
-            <a id="form" href="/form/1" class="btn">선택하기</a>
-            {% if user.id == foodSelectlist.user %}
-                <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+           {# 0은 categorynumber가 2인거 하기위해서 #}
+            {% if (user.id).toString() in foodSelectlist[0].userlike %}
+                {% if user.id == foodSelectlist.user %}
+                    <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</div> 
+                {% endif %}
+            {% else %}
+                <a id="form" href="/form/1" class="btn">선택하기</a>
             {% endif %}
             {% for foodSelect in foodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
@@ -36,10 +40,16 @@
             {% endfor %}
         </div>
          <div class="chinesefood-form"> [ 중식 ]
-            <a id="form" href="/form/2" class="btn">선택하기</a>
-            {% if user.id == foodSelectlist.user %}
-                <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</div> 
+            
+            {# 10은 categorynumber가 2인거 확인하기위해서 #}
+            {% if (user.id).toString() in foodSelectlist[10].userlike %}
+                {% if user.id == foodSelectlist.user %}
+                    <div id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</div> 
+                {% endif %}
+            {% else %}
+                <a id="form" href="/form/2" class="btn">선택하기</a>
             {% endif %}
+
             {% for foodSelect in foodSelectlist %}
                 {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
                     <div>
@@ -75,7 +85,7 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
-                        <button id="show"> 더보기</button>
+                        <button id="show">더보기</button>
                     </div>
                     {% for foodSelect in foodSelectlist %} {# 푸드 각각을 나누어줌 #}
                         {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %} {# 카테고리 나눔#}

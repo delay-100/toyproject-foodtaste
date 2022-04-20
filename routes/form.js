@@ -7,15 +7,15 @@ const router = express.Router();
 
 router.get('/:id', isLoggedIn, async (req, res, next) => {
     try {
-      console.log(parseInt(req.params.id));
+      // console.log(parseInt(req.params.id));
       const foods = await Food.findAll({ // db에서 게시글을 조회 
+        raw: true,
         where:{
             categorynumber : parseInt(req.params.id),
         },
         order: [["createdAt", "DESC"]], // 게시글의 순서를 최신순으로 정렬
       });
-      
-      res.render('form', { title: '호불호 선택 폼', foodlist: foods });
+      res.render('form', { title: '호불호 선택 폼', foodlist: foods, category: foods[0].categoryname });
     } catch (err) {
       console.error(err);
       next(err);
@@ -77,6 +77,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         if(!selectUserid)return res.json({status:'false'});
         if(selectUserid==userid){
           const foods = await Food.findAll({
+            raw: true,
             where:  {
               categorynumber: category
             },
