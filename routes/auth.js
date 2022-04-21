@@ -73,4 +73,26 @@ router.get('/logout', isLoggedIn, (req, res) => {
 });
 
 
+router.post('/modifyUser', isLoggedIn, async (req, res, next) => {
+    try {
+        const userid =  req.user.id;
+        const { usernick }= req.body;
+       
+        if(!req.user.id)return res.json({status:'false'});
+        await User.update({
+            nick: usernick
+        },
+        {
+            where:{
+                id: userid,
+            }
+        });
+        return res.redirect('/');
+    }
+    catch (error){
+        console.error(error);
+        next(error);
+    }
+});
+
 module.exports = router;

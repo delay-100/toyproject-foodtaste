@@ -11,12 +11,14 @@ const rl = readLine.createInterface({
 });
 
 // db 추가
-rl.on('line', function (text) {
+rl.on('line', async function (text) {
     text = text.split(', ');
 
+    
     Food.create({
         name: text[0],
         categorynumber: Number(text[1]),
         categoryname: text[2],
     });
+    
 });

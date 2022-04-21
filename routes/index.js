@@ -15,13 +15,15 @@ router.use((req, res, next) => {
   });
 
 router.get('/', async (req, res, next) => {
-    const howmanyId = await User.findOne({
-      raw: true,
-      order: [
-        ["createdAt", "desc"]
-      ],
-    });
-    res.render('index', { title: '음식취향 %', num: howmanyId.id});
+    // const howmanyId = await User.findOne({
+    //   raw: true,
+    //   order: [
+    //     ["createdAt", "desc"]
+    //   ],
+    // });
+    // const how = howmanyId.id;
+    const how = 0;
+    res.render('index', { title: '음식취향 %', num: how});
 });
 
 module.exports = router;

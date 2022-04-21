@@ -27,8 +27,8 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
       const keylist = Object.keys(req.body).toString()
       const valuelist = Object.values(req.body).toString();
   
-      console.log(keylist);
-      console.log(valuelist);
+      // console.log(keylist);
+      // console.log(valuelist);
       const list = [];
       let j = 0;
       let num = "";
@@ -43,24 +43,68 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         }
       }
       list[j] = num;
-      
+      // console.log('--------------------');
+      // console.log(list); // [ '1', '2', '3', '4', '5', ~ '10' ]
+      // console.log('--------------------');
+
       let z = 0;
       for(let i=0; i<list.length; i++) {
-        console.log(parseInt(list[i],10));
-        console.log(valuelist[z]);
+        // console.log(parseInt(list[i],10));
+        // console.log(valuelist[z]);
   
-        if(valuelist[z]==='t'){
-          await Select.create({
+        const isExist = await Select.findOne({
+          raw: true,
+          where: {
+            userSelected: req.user.id,
+            foodSelected: parseInt(list[i],10),
+          }
+        });
+        // console.log('i='+i);
+        // console.log(isExist);
+
+        // 이미 값이 있는 경우
+        if(isExist!== null){
+          // 수정이 있는 경우(!수정이 없는 경우)
+          if(!((valuelist[z] == 't' && isExist.like == true)||(valuelist[z] == 'f' && isExist.like == false))){
+            // 이미 있는 값이 false일 때 
+            if(isExist.like == false){
+              await Select.update({
+                like: true,
+              },{
+                where:{
+                  userSelected: req.user.id,
+                  foodSelected: parseInt(list[i],10),
+                }
+              });
+            }
+            // 이미 있는 값이 true 일 때 
+            else{
+              await Select.update({
+                like: false,
+              },{
+                where:{
+                  userSelected: req.user.id,
+                  foodSelected: parseInt(list[i],10),
+                }
+              });
+            }
+          }
+        }
+        // 값이 없는 경우
+        else {
+          if(valuelist[z]==='t'){
+            await Select.create({
               like: true,
               userSelected: req.user.id,
               foodSelected: parseInt(list[i],10),
-          });
-        } else{
-          await Select.create({
+            });
+          } else {
+            await Select.create({
               like: false,
               userSelected: req.user.id,
               foodSelected: parseInt(list[i],10),
-          });
+            });
+          }  
         }
         z+=2;
       }
@@ -70,6 +114,37 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         next(error);
     }
   });
+
+  router.get('/update/:id', isLoggedIn, async (req, res, next) => {
+    try {
+      // console.log(parseInt(req.params.id));
+
+      const Selects = await Select.findAll({
+        raw: true,
+        where:{
+            userSelected: req.user.id,
+        },
+        order: [["foodSelected", "asc"]], 
+      });
+
+      const foods = await Food.findAll({ // db에서 게시글을 조회 
+        raw: true,
+        where:{
+            categorynumber : parseInt(req.params.id),
+        },
+        order: [["id", "asc"]], 
+      });
+
+      for(let i=0; i<foods.length; i++){
+        foods[i].like = Selects[i].like;
+      }
+      console.log(foods);
+      res.render('form', { title: '호불호 선택 폼', foodlist: foods, category: foods[0].categoryname });
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+});
 
   router.post('/remove', isLoggedIn, async (req, res, next) => {
     try{
