@@ -23,6 +23,7 @@ router.post('/follow/:id', isLoggedIn, async (req, res, next) => {
     }
 });
 
+// id를 nick으로 바꿔야 함
 router.post('/unfollow', isLoggedIn, async (req, res, next) => {
     const { followingId } = req.body;
     const Follow = db.sequelize.models.Follow;
