@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
     });
     const how = howmanyId.id;
     // const how = 0;  
-    res.render('index', { title: '음식취향 %', num: how});
+    res.render('index', { title: '너의 취향은?', num: how});
 });
 
 module.exports = router;
