@@ -199,6 +199,32 @@
                             {% endif %}
                         </div>
                         {% endif %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 %} {# 카테고리 나눔#}
+                        <div>
+                            {{foodSelect.name}} 
+                            {# {{following.id}} user가 following 하는 사람 #}
+                            {% if following.id in foodSelect.userlike %}
+                                {% if foodSelect.userlike[following.id]==1 %}
+                                    (호)
+                                {% else %}
+                                    (불호)
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 %} {# 카테고리 나눔#}
+                        <div>
+                            {{foodSelect.name}} 
+                            {# {{following.id}} user가 following 하는 사람 #}
+                            {% if following.id in foodSelect.userlike %}
+                                {% if foodSelect.userlike[following.id]==1 %}
+                                    (호)
+                                {% else %}
+                                    (불호)
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endfor %}
