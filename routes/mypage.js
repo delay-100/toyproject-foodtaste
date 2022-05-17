@@ -7,7 +7,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     
     const categorynumber = 2;
-    const categorydic = {'1': 10, '2': 5};
+    const categorydic = {'1': 40, '2': 20, '3':20, '4':20, '5': 20};
 
     // console.log(req.user.id); // userid
 
