@@ -13,12 +13,12 @@ router.get('/join', (req, res) => {
 
 // Post /join - 회원가입 라우터
 router.post('/join', isNotLoggedIn, async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { localId, nick, password } = req.body;
     try {
         const exUser = await User.findOne({ where: {localId} });
-        if (exUser) {
-            return res.redirect('/join?error=exist');
+        if (exUser) {   
+            return res.redirect('/auth/join?error=exist'); // 이미 유저가 존재하는 경우
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
