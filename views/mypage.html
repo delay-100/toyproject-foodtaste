@@ -3,9 +3,9 @@
 {% block content %}
 
  {% if user and user.localId %}
-    <input id="my-nick" type="hidden" value="{{user.nick}}">
+    <input id="my-id" type="hidden" value="{{user.id}}">
     <div>
-        <input type="text" name="userFollow" id="followNick" placeholder="닉네임 입력"> {# req.query.hashtag #}
+        <input type="text" name="userFollow" id="followId" placeholder="아이디 입력"> {# req.query.hashtag #}
         <button id="follow">팔로우</button>
     </div>
 
@@ -48,7 +48,7 @@
             {% endfor %}
         </div>
         <div class="chinesefood-form"> [ 중식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[20].userlike %}
+            {% if foodSelectlist and (user.id).toString() in foodSelectlist[40].userlike %}
                 {% if user.id == foodSelectlist.user %}
                     <a id="form-modify" href="/form/update/2" class="btn">수정하기</a>
                     <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</button>               
@@ -74,7 +74,7 @@
             {% endfor %}
         </div>
         <div class="japanesefood-form"> [ 일식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[28].userlike %}
+            {% if foodSelectlist and (user.id).toString() in foodSelectlist[60].userlike %}
                 {% if user.id == foodSelectlist.user %}
                     <a id="form-modify" href="/form/update/3" class="btn">수정하기</a>
                     <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 3)' class="btn">삭제하기</button>               
@@ -100,7 +100,7 @@
             {% endfor %}
         </div>
         <div class="westernfood-form"> [ 양식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[37].userlike %}
+            {% if foodSelectlist and (user.id).toString() in foodSelectlist[80].userlike %}
                 {% if user.id == foodSelectlist.user %}
                     <a id="form-modify" href="/form/update/4" class="btn">수정하기</a>
                     <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 4)' class="btn">삭제하기</button>               
@@ -126,7 +126,7 @@
             {% endfor %}
         </div>
         <div class="likedislike-form"> [ 호불호 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[46].userlike %}
+            {% if foodSelectlist and (user.id).toString() in foodSelectlist[100].userlike %}
                 {% if user.id == foodSelectlist.user %}
                     <a id="form-modify" href="/form/update/5" class="btn">수정하기</a>
                     <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 5)' class="btn">삭제하기</button>               
@@ -159,6 +159,7 @@
             {% for following in user.Followings %} 
                 <div>
                     {{following.nick}}
+                    {{"("+following.localId+")"}}
                     <div class="following-percent">
                         {% for percent in percentlist %}
                             {% if percent.id==following.id %}
@@ -292,13 +293,13 @@
        } #}
 
        document.querySelector('#follow').addEventListener('click', function(e) {
-                    const myId = document.querySelector('#my-nick'); // myId는 현재 로그인한 사용자, layout.html에 있는 <input id="my-id" type="hidden" value="{{user.id}}">
+                    const myId = document.querySelector('#my-id'); // myId는 현재 로그인한 사용자, layout.html에 있는 <input id="my-id" type="hidden" value="{{user.id}}">
                     
                     if(myId){
-                        const userNick = document.querySelector('#followNick').value; // parentNode는 "class=twit"임. 즉, 바로 위의 div를 뜻함
-                        if(userNick !== myId.value){
-                            if(confirm(userNick + '님을 팔로우하시겠습니까?')){
-                                axios.post(`user/follow/${userNick}`) // 입력된 닉네임
+                        const userId = document.querySelector('#followId').value;
+                        if(userId !== myId.value){
+                            if(confirm(userId + '님을 팔로우하시겠습니까?')){
+                                axios.post(`user/follow/${userId}`) // 입력된 아이디
                             .then(() =>{
                                 location.reload();
                             })
