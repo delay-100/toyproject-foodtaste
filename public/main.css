@@ -1,11 +1,18 @@
-.koreanfood-form {
-    border: 1px solid black;
-}
 .food-form {
     border: 1px solid black;
+    flex-grow: 1;
 }
+
 
 #form-remove {
     border: 1px solid black;
 }
 
+.form-myfoodSelect {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: space-evenly;
+}

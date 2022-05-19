@@ -6,7 +6,7 @@ const { Food, Select, User } = require('../models');
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     
-    const categorynumber = 2;
+    const categorynumber = 5;
     const categorydic = {'1': 40, '2': 20, '3':20, '4':20, '5': 20};
 
     // console.log(req.user.id); // userid
@@ -88,7 +88,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
           }
         }
         // 카테고리별로 퍼센트 계산
-        dic[i.toString()] = (sameNum/categorydic[i])*100;
+        dic[i.toString()] = parseInt((sameNum/categorydic[i])*100);
       }
 
       // // 팔로잉 퍼센트 객체 생성
