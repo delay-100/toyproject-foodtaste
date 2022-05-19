@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{{title}}</title>
         <!-- 모바일 호환 -->
-        <meta name="viewport" content="width=device-width, user-scalable=no"> 
+        <meta name="viewport" content="width=device-width, user-scalable=yes"> 
         <!-- IE 문서 모드, IE=edge는 IE브라우저에서 가장 최신 선택하는 것 -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <link rel="stylesheet" href="/main.css">
@@ -13,14 +13,14 @@
         <div>
             <div>            
                 <a href="/" class="btn">메인 화면</a>
-                {% if user and user.localId %}
-                <div>
-                    <div class="user-name">안녕하세용 {{user.nick}}님!</div>
-                    <a id="mypage" href="/mypage" class="btn">마이페이지</a>
-                    
-                    <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+                <div class="mypageSetting" id="info">
+                    {% if user and user.localId %}
+                        <div class="user-name">안녕하세용 <strong>{{user.nick}}</strong>님!</div>
+                        <a id="mypage" href="/mypage" class="btn">마이페이지</a>
+                        
+                        <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+                    {% else %}
                 </div>
-                {% else %}
                 <form id="login-form" action="/auth/login" method="post">
                     <div class="input-group">
                         <label for="localId">아이디</label>

@@ -2,200 +2,244 @@
 
 {% block content %}
 
- {% if user and user.localId %}
-    <input id="my-id" type="hidden" value="{{user.id}}">
-    <div>
-        <input type="text" name="userFollow" id="followId" placeholder="아이디 입력"> {# req.query.hashtag #}
-        <button id="follow">팔로우</button>
-    </div>
+    {% if user and user.localId %}
 
-    <div>
-        <form id="nick-form" action="/auth/modifyUser" method="post"> 
-            <input id="nick" name="usernick" maxlength="15" placeholder="변경할 닉네임"></input> 
-            <button id="twit-btn" type="submit" class="btn">닉네임 변경</button> {# type이 submit이면 form의 action의 주소가 실행됨 #}
-        </form>
-    </div>
-
-{% endif %}
-
-    <a id="follow" href="/mypage/follow" class="btn">팔로잉/팔로워</a>
-    <br>
-    MY PICK!
-    <div class="form-myfoodSelect"> 
-        <div class="food-form" id="koreanfood-form"> [ 한식 ]
-           {# 0은 categorynumber가 1인거 하기위해서 #}
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[0].userlike %}
-                {% if user.id == foodSelectlist.user %}
-                    <a id="form-modify" href="/form/update/1" class="btn">수정하기</a>
-                    <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</button>
-                {% endif %}
-            {% else %}
-                <a id="form" href="/form/1" class="btn">선택하기</a>
-            {% endif %}
-            {% for foodSelect in foodSelectlist %}
-                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
-                    <div>
-                        {{loop.index}}  
-                        {{foodSelect.name}}
-                        {% if (user.id).toString() in foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] == 1 %}
-                                (호)
-                            {% else %}
-                                (불호)
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                {% endif %}
-            {% endfor %}
+        <div class="mypageSetting" id="setting">
+            <div class="user-name">안녕하세용 <strong>{{user.nick}}</strong>님!</div>
+                <a id="mypage" href="/mypage" class="btn">마이페이지</a>  
+                <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+            <div>
+                <form id="nick-form" action="/auth/modifyUser" method="post"> 
+                    <input id="nick" name="usernick" maxlength="15" placeholder="변경할 닉네임"></input> 
+                    <button id="twit-btn" type="submit" class="btn">닉네임 변경</button> {# type이 submit이면 form의 action의 주소가 실행됨 #}
+                </form>
+            </div>
+            <input id="my-id" type="hidden" value="{{user.id}}">
+            <div>
+                <input type="text" name="userFollow" id="followId" placeholder="아이디 입력"> {# req.query.hashtag #}
+                <button id="follow">팔로우</button>
+            </div>    
+            <a id="follow" href="/mypage/follow" class="btn">팔로잉/팔로워</a>
         </div>
-        <div class="food-form" id="chinesefood-form"> [ 중식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[40].userlike %}
-                {% if user.id == foodSelectlist.user %}
-                    <a id="form-modify" href="/form/update/2" class="btn">수정하기</a>
-                    <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</button>               
-                {% endif %}
-            {% else %}
-                <a id="form" href="/form/2" class="btn">선택하기</a>
-            {% endif %}
-
-            {% for foodSelect in foodSelectlist %}
-                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
-                    <div>
-                        {{loop.index}}  
-                        {{foodSelect.name}}
-                        {% if (user.id).toString() in foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] == 1 %}
-                                (호)
-                            {% else %}
-                                (불호)
+    {% endif %}
+    <div class="mypage-main">
+        <div class="pick-text" id="mypick">MY PICK!</div>
+        <div class="form-myfoodSelect"> 
+            <div class="food-form" id="koreanfood-form"> 
+                <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">[ 한식 ]</div>
+                    <div class="food-info-set">
+                        {% if foodSelectlist and (user.id).toString() in foodSelectlist[0].userlike %}
+                            {% if user.id == foodSelectlist.user %}
+                                <a id="form-modify" href="/form/update/1" class="btn">수정하기</a>
+                                <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 1)' class="btn">삭제하기</button>
                             {% endif %}
+                        {% else %}
+                            <a id="form" href="/form/1" class="btn">선택하기</a>
                         {% endif %}
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="food-form" id="japanesefood-form"> [ 일식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[60].userlike %}
-                {% if user.id == foodSelectlist.user %}
-                    <a id="form-modify" href="/form/update/3" class="btn">수정하기</a>
-                    <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 3)' class="btn">삭제하기</button>               
-                {% endif %}
-            {% else %}
-                <a id="form" href="/form/3" class="btn">선택하기</a>
-            {% endif %}
-
-            {% for foodSelect in foodSelectlist %}
-                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 %}
-                    <div>
-                        {{loop.index}}  
-                        {{foodSelect.name}}
-                        {% if (user.id).toString() in foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] == 1 %}
-                                (호)
-                            {% else %}
-                                (불호)
+                </div>
+                {% for foodSelect in foodSelectlist %}
+                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
+                        <div>
+                            {{loop.index}}  
+                            {{foodSelect.name}}
+                            {% if (user.id).toString() in foodSelect.userlike %}
+                                {% if foodSelect.userlike[user.id] == 1 %}
+                                    <div class="islike">
+                                        (호)
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        (불호)
+                                    </div>
+                                {% endif %}
                             {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="food-form" id="chinesefood-form"> 
+                <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">[ 중식 ]</div>
+                    <div class="food-info-set">
+                        {% if foodSelectlist and (user.id).toString() in foodSelectlist[40].userlike %}
+                            {% if user.id == foodSelectlist.user %}
+                                <a id="form-modify" href="/form/update/2" class="btn">수정하기</a>
+                                <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 2)' class="btn">삭제하기</button>               
+                            {% endif %}
+                        {% else %}
+                            <a id="form" href="/form/2" class="btn">선택하기</a>
                         {% endif %}
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="food-form" id="westernfood-form"> [ 양식 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[80].userlike %}
-                {% if user.id == foodSelectlist.user %}
-                    <a id="form-modify" href="/form/update/4" class="btn">수정하기</a>
-                    <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 4)' class="btn">삭제하기</button>               
-                {% endif %}
-            {% else %}
-                <a id="form" href="/form/4" class="btn">선택하기</a>
-            {% endif %}
-
-            {% for foodSelect in foodSelectlist %}
-                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 %}
-                    <div>
-                        {{loop.index}}  
-                        {{foodSelect.name}}
-                        {% if (user.id).toString() in foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] == 1 %}
-                                (호)
-                            {% else %}
-                                (불호)
+                </div>
+                {% for foodSelect in foodSelectlist %}
+                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
+                        <div>
+                            {{loop.index}}  
+                            {{foodSelect.name}}
+                            {% if (user.id).toString() in foodSelect.userlike %}
+                                {% if foodSelect.userlike[user.id] == 1 %}
+                                    <div class="islike">
+                                        (호)
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        (불호)
+                                    </div>
+                                {% endif %}
                             {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="food-form" id="japanesefood-form"> 
+                <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">[ 일식 ]</div>
+                    <div class="food-info-set">
+                        {% if foodSelectlist and (user.id).toString() in foodSelectlist[60].userlike %}
+                            {% if user.id == foodSelectlist.user %}
+                                <a id="form-modify" href="/form/update/3" class="btn">수정하기</a>
+                                <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 3)' class="btn">삭제하기</button>               
+                            {% endif %}
+                        {% else %}
+                            <a id="form" href="/form/3" class="btn">선택하기</a>
                         {% endif %}
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="food-form" id="likedislike-form"> [ 호불호 ] 
-            {% if foodSelectlist and (user.id).toString() in foodSelectlist[100].userlike %}
-                {% if user.id == foodSelectlist.user %}
-                    <a id="form-modify" href="/form/update/5" class="btn">수정하기</a>
-                    <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 5)' class="btn">삭제하기</button>               
-                {% endif %}
-            {% else %}
-                <a id="form" href="/form/5" class="btn">선택하기</a>
-            {% endif %}
-
-            {% for foodSelect in foodSelectlist %}
-                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 %}
-                    <div>
-                        {{loop.index}}  
-                        {{foodSelect.name}}
-                        {% if (user.id).toString() in foodSelect.userlike %}
-                            {% if foodSelect.userlike[user.id] == 1 %}
-                                (호)
-                            {% else %}
-                                (불호)
+                </div>
+                {% for foodSelect in foodSelectlist %}
+                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 %}
+                        <div>
+                            {{loop.index}}  
+                            {{foodSelect.name}}
+                            {% if (user.id).toString() in foodSelect.userlike %}
+                                {% if foodSelect.userlike[user.id] == 1 %}
+                                    <div class="islike">
+                                        (호)
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        (불호)
+                                    </div>
+                                {% endif %}
                             {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="food-form" id="westernfood-form"> 
+                <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">[ 양식 ]</div>
+                    <div class="food-info-set">
+                        {% if foodSelectlist and (user.id).toString() in foodSelectlist[80].userlike %}
+                            {% if user.id == foodSelectlist.user %}
+                                <a id="form-modify" href="/form/update/4" class="btn">수정하기</a>
+                                <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 4)' class="btn">삭제하기</button>               
+                            {% endif %}
+                        {% else %}
+                            <a id="form" href="/form/4" class="btn">선택하기</a>
                         {% endif %}
                     </div>
-                {% endif %}
-            {% endfor %}
+                </div>
+                {% for foodSelect in foodSelectlist %}
+                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 %}
+                        <div>
+                            {{loop.index}}  
+                            {{foodSelect.name}}
+                            {% if (user.id).toString() in foodSelect.userlike %}
+                                {% if foodSelect.userlike[user.id] == 1 %}
+                                    <div class="islike">
+                                        (호)
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        (불호)
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="food-form" id="likedislike-form">
+                <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">[ 호불호 ]</div>
+                    <div class="food-info-set">
+                        {% if foodSelectlist and (user.id).toString() in foodSelectlist[100].userlike %}
+                            {% if user.id == foodSelectlist.user %}
+                                <a id="form-modify" href="/form/update/5" class="btn">수정하기</a>
+                                <button id="form-remove" onClick='removeSelect({{foodSelectlist.user}}, {{user.id}}, 5)' class="btn">삭제하기</button>               
+                            {% endif %}
+                        {% else %}
+                            <a id="form" href="/form/5" class="btn">선택하기</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% for foodSelect in foodSelectlist %}
+                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 %}
+                        <div>
+                            {{loop.index}}  
+                            {{foodSelect.name}}
+                            {% if (user.id).toString() in foodSelect.userlike %}
+                                {% if foodSelect.userlike[user.id] == 1 %}
+                                    <div class="islike">
+                                        (호)
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        (불호)
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
     <div class="follower-list">
-        <h2>팔로잉 목록</h2>
-        {% if user.Followings %} 
-            {% for following in user.Followings %} 
-                <div>
-                    {{following.nick}}
-                    {{"("+following.localId+")"}}
-                    <div class="following-percent">
-                        {% for percent in percentlist %}
-                            {% if percent.id==following.id %}
-                                {% if ('1' in percent.categorypercent) %}
-                                    {{ percent.categorypercent['1'] }}%
+        <div class="pick-text" id="followingspick">FOLLOWINGS PICK!</div>
+        <div class="">
+            {% if user.Followings %} 
+                {% for following in user.Followings %} 
+                    <div>
+                        {{following.nick}}
+                        {{"("+following.localId+")"}}
+                        <div class="following-percent">
+                            {% for percent in percentlist %}
+                                {% if percent.id==following.id %}
+                                    {% if ('1' in percent.categorypercent) %}
+                                        {{ percent.categorypercent['1'] }}%
+                                    {% endif %}
+                                    {% if ('2' in percent.categorypercent) %}
+                                        {{ percent.categorypercent['2'] }}%
+                                    {% endif %}
+                                    {% if ('3' in percent.categorypercent) %}
+                                        {{ percent.categorypercent['3'] }}%
+                                    {% endif %}
+                                    {% if ('4' in percent.categorypercent) %}
+                                        {{ percent.categorypercent['4'] }}%
+                                    {% endif %}
+                                    {% if ('5' in percent.categorypercent) %}
+                                        {{ percent.categorypercent['5'] }}%
+                                    {% endif %}
                                 {% endif %}
-                                {% if ('2' in percent.categorypercent) %}
-                                    {{ percent.categorypercent['2'] }}%
-                                {% endif %}
-                                {% if ('3' in percent.categorypercent) %}
-                                    {{ percent.categorypercent['3'] }}%
-                                {% endif %}
-                                {% if ('4' in percent.categorypercent) %}
-                                    {{ percent.categorypercent['4'] }}%
-                                {% endif %}
-                                {% if ('5' in percent.categorypercent) %}
-                                    {{ percent.categorypercent['5'] }}%
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                        <button id="show">더보기</button>
+                            {% endfor %}
+                            <button id="show">더보기</button>
+                        </div>
+                        
+                        {# 여기에 입력 #}
+
+
                     </div>
-                    
-                    {# 여기에 입력 #}
-
-
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
 
 {% block script %}
     <script>
+        
+        document.getElementById("info").style.visibility="hidden";
+        document.getElementById("info").style.display="none";
 
         async function removeSelect(selectUserid, userid, category){
            await axios.post(`/form/remove`,{
@@ -211,24 +255,6 @@
                }
            })
        }
-
-{# document.querySelector('#follow').addEventListener('click', function(e){
-
-}
-        async function modifySelect(selectUserid, userid, category){
-           await axios.post(`/form/modify`,{
-               selectUserid,
-               userid,
-               category,
-           }).then((res)=>{
-               if(res.data.status==="true"){
-                   location.reload();
-               }
-               else if(res.data.status==="not equal user"){
-                   alert(selectUserid+"님의 정보가 아닙니다!");
-               }
-           })
-       } #}
 
        document.querySelector('#follow').addEventListener('click', function(e) {
                     const myId = document.querySelector('#my-id'); // myId는 현재 로그인한 사용자, layout.html에 있는 <input id="my-id" type="hidden" value="{{user.id}}">
@@ -251,7 +277,11 @@
                     }
                 }
         });
+
         
+        {# window.onload = () =>{ #}
+        {# }; #}
+
 
     </script>
 {% endblock %}    

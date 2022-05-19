@@ -1,8 +1,32 @@
-.food-form {
-    border: 1px solid black;
-    flex-grow: 1;
+@font-face {
+    font-family: 'SEBANG_Gothic_Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
+body {
+    font-family: 'SEBANG_Gothic_Regular';
+    font-size: small;
+}
+
+.food-form {
+    border: 1px solid black;
+    /* flex-grow: 1; */
+    padding: 2%;
+    border-collapse: collapse;
+    min-width: 152px;
+}
+
+.islike {
+    display: inline;
+    float: right;
+}
+
+.isdislike {
+    display: inline;
+    float: right;
+}
 
 #form-remove {
     border: 1px solid black;
@@ -12,7 +36,54 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: stretch;
     align-content: space-evenly;
 }
+
+.food-info {
+    margin-bottom: 10%;
+}
+
+.food-info-text {
+    font-size: large;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.food-info-set {
+    text-align: right;
+}
+
+.mypageSetting {
+    border: 1px solid black;
+}
+
+#info {
+    float: right;
+}
+
+#setting {
+    float: right;
+}
+
+.mypage-main {
+    margin-top: 10%;
+    display: block;
+}
+
+#setting {
+    position: static;
+    top: 100px; 
+    right: 100px;
+}
+
+.pick-text {
+    text-align: center;
+    padding: 2%;
+    font-size: x-large;
+    font-weight: bolder;
+    /* min-width: 207px; */
+    clear:both;
+}
+

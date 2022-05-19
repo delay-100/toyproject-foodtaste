@@ -87,7 +87,7 @@ router.post('/modifyUser', isLoggedIn, async (req, res, next) => {
                 id: userid,
             }
         });
-        return res.redirect('/');
+        return res.redirect('/mypage');
     }
     catch (error){
         console.error(error);
