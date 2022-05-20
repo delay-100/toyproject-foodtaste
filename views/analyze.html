@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="analyze">
+    같이 밥 먹을 사람을 체크해주세요!
+    <div class="followings-check">
+        {% if user.Followings %} 
+            {% for following in user.Followings %} 
+                <div id="followings-row">                  
+                    <label class="container">
+                    <input type="checkbox" name="{{following.localId}}">
+                    {{following.nick}}
+                    {{"("+following.localId+")"}}
+                    <span class="checkmark"></span>
+                    </label>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <button></button>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}    

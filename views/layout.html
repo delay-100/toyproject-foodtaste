@@ -15,10 +15,23 @@
                 <a href="/" class="btn">메인 화면</a>
                 <div class="mypageSetting" id="info">
                     {% if user and user.localId %}
-                        <div class="user-name">안녕하세용 <strong>{{user.nick}}</strong>님!</div>
-                        <a id="mypage" href="/mypage" class="btn">마이페이지</a>
-                        
-                        <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+                        <div class="mypageSetting" id="setting">
+                            <div class="user-name">안녕하세용 <strong>{{user.nick}}</strong>님!</div>
+                                <a id="mypage" href="/mypage" class="btn">마이페이지</a>  
+                                <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+                            <div>
+                                <form id="nick-form" action="/auth/modifyUser" method="post"> 
+                                    <input id="nick" name="usernick" maxlength="15" placeholder="변경할 닉네임"></input> 
+                                    <button id="twit-btn" type="submit" class="btn">닉네임 변경</button> {# type이 submit이면 form의 action의 주소가 실행됨 #}
+                                </form>
+                            </div>
+                            <input id="my-id" type="hidden" value="{{user.id}}">
+                            <div>
+                                <input type="text" name="userFollow" id="followId" placeholder="아이디 입력"> {# req.query.hashtag #}
+                                <button id="follow">팔로우</button>
+                            </div>    
+                            <a id="follow" href="/mypage/follow" class="btn">팔로잉/팔로워</a>
+                        </div>
                     {% else %}
                 </div>
                 <form id="login-form" action="/auth/login" method="post">

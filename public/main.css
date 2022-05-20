@@ -94,7 +94,6 @@ body {
     text-align: center; 
     width:fit-content;
     margin:auto;
-
 }
 
 .follower-list {
@@ -136,3 +135,12 @@ body {
 
 }
 
+.analyze {
+    text-align: center; 
+    width:fit-content;
+    margin:auto;
+}
+
+#followings-row {
+    text-align: left;
+}
