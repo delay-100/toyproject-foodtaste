@@ -195,37 +195,83 @@
 
     <div class="follower-list">
         <div class="pick-text" id="followingspick">FOLLOWINGS PICK!</div>
-        <div class="">
+        <div class="following-category-head">
+            <div id="following-category-id">[닉네임]</div>
+            <div id="following-category-korean">[한식]</div>
+            <div id="following-category-chinese">[중식]</div>
+            <div id="following-category-japanese">[일식]</div>
+            <div id="following-category-western">[양식]</div>
+            <div id="following-category-likedislike">[호불호]</div>
+            <div id="following-category-sum">[전체]</div>
+        </div>
+        <div class="followings-all">
             {% if user.Followings %} 
                 {% for following in user.Followings %} 
                     <div>
-                        {{following.nick}}
-                        {{"("+following.localId+")"}}
-                        <div class="following-percent">
+                        <div class="following-percent-div">
+                            <div id="following-info">
+                                <div id="followingnick">
+                                    {{following.nick}}
+                                </div>    
+                                <div id="followingid">
+                                    {{"("+following.localId+")"}}
+                                </div>    
+                            </div>    
                             {% for percent in percentlist %}
                                 {% if percent.id==following.id %}
                                     {% if ('1' in percent.categorypercent) %}
-                                        {{ percent.categorypercent['1'] }}%
+                                        <div class="following-percent-text">
+                                            {{ percent.categorypercent['1'] }}%
+                                            <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div>
+                                        </div>    
                                     {% endif %}
                                     {% if ('2' in percent.categorypercent) %}
-                                        {{ percent.categorypercent['2'] }}%
+                                        <div class="following-percent-text">
+                                            {{ percent.categorypercent['2'] }}%
+                                            <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div>                                            
+                                        </div>    
                                     {% endif %}
                                     {% if ('3' in percent.categorypercent) %}
-                                        {{ percent.categorypercent['3'] }}%
+                                        <div class="following-percent-text">
+                                            {{ percent.categorypercent['3'] }}%
+                                            <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div>
+                                        </div>    
                                     {% endif %}
                                     {% if ('4' in percent.categorypercent) %}
-                                        {{ percent.categorypercent['4'] }}%
+                                        <div class="following-percent-text">
+                                            {{ percent.categorypercent['4'] }}%
+                                            <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div>
+                                        </div>   
                                     {% endif %}
                                     {% if ('5' in percent.categorypercent) %}
-                                        {{ percent.categorypercent['5'] }}%
+                                        <div class="following-percent-text">
+                                            {{ percent.categorypercent['5'] }}%
+                                            <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div>
+                                        </div>   
+                                    {% endif %}
+                                    {% if percent.sumpercent %}
+                                        <div class="following-percent-text">
+                                            {{ percent.sumpercent }}%
+                                            {# <div class="following-percent-more"> 
+                                                <button id="show">더보기</button>
+                                            </div> #}
+                                        </div>    
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            <button id="show">더보기</button>
                         </div>
                         
                         {# 여기에 입력 #}
-
 
                     </div>
                 {% endfor %}

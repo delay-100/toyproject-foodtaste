@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 const { Food, Select, User } = require('../models');
+const { sum } = require('../models/user');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
@@ -73,9 +74,10 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       const followingID = req.user.Followings[k].id;
 
       const dic = {};
-
+      let sump = 0;
       for(let i=1; i<categorynumber+1; i++){     
         let sameNum = 0;
+        
         for(j in foods){
           // 푸드의 카테고리 별로
           if(foods[j].categorynumber==i){
@@ -89,21 +91,24 @@ router.get('/', isLoggedIn, async (req, res, next) => {
         }
         // 카테고리별로 퍼센트 계산
         dic[i.toString()] = parseInt((sameNum/categorydic[i])*100);
+        sump += parseInt((sameNum/categorydic[i])*100);
       }
-
+      sump = parseInt(sump/categorynumber);
       // // 팔로잉 퍼센트 객체 생성
       const user = {
         id: followingID,
         categorypercent: dic, 
+        sumpercent: sump,
       };
       // // userpercent에 팔로잉 퍼센트 객체 추가
       userpercent.push(user);
     }
     foods.user =req.user.id;
 
+
     // console.log(foods);
     // foodlist: food 정보, foodSelectlist: 각 user(자신, 팔로잉, 팔로워)의 food - 선택 정보
-    // console.log(userpercent);
+    console.log(userpercent);
     res.render('mypage', { title: '마이페이지', foodSelectlist: foods, percentlist: userpercent});
   } catch (err) {
     console.error(err);

@@ -87,3 +87,34 @@ body {
     clear:both;
 }
 
+.following-percent-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: space-evenly;    
+    border: 1px solid black;
+}
+
+.following-percent-text {  
+    clear:both;
+    text-align: center;
+}
+
+#following-info {
+    text-align: center;
+}
+
+.followings-all {
+    overflow: auto;
+}
+
+.following-category-head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: space-evenly;    
+}
