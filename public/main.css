@@ -39,6 +39,7 @@ body {
     justify-content: center;
     align-items: stretch;
     align-content: space-evenly;
+    margin-bottom: 5%;
 }
 
 .food-info {
@@ -85,36 +86,53 @@ body {
     font-weight: bolder;
     /* min-width: 207px; */
     clear:both;
+    margin-bottom: 3%;
+
 }
 
-.following-percent-div {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    align-content: space-evenly;    
-    border: 1px solid black;
+.follower-list-div {
+    text-align: center; 
+    width:fit-content;
+    margin:auto;
+
 }
 
-.following-percent-text {  
-    clear:both;
-    text-align: center;
+.follower-list {
+    border-collapse: collapse;
+    min-width: 200px;
 }
 
-#following-info {
-    text-align: center;
+.follower-list th, .follower-list td {
+      padding: 10px;
+      border: 1px solid #ddd;
 }
 
-.followings-all {
-    overflow: auto;
+@media (max-width: 605px) {
+    .follower-list thead { 
+        display: none;
+    }
+
+    .follower-list, .follower-list tbody, .follower-list tr, .follower-list th, .follower-list td {
+        display: block;
+    }
+
+    .follower-list td {
+        position: relative;
+        padding-left: 50%; 
+    }
+    .follower-list td:before {
+        position: absolute;
+        top: 24%;
+        right: 65%;
+        font-weight: bold;
+    }
+
+    .follower-list td:nth-of-type(1):before { content: "[한식]"; }
+    .follower-list td:nth-of-type(2):before { content: "[중식]"; }
+    .follower-list td:nth-of-type(3):before { content: "[일식]"; }
+    .follower-list td:nth-of-type(4):before { content: "[양식]"; }
+    .follower-list td:nth-of-type(5):before { content: "[호불호]"; }
+    .follower-list td:nth-of-type(6):before { content: "[전체]"; }
+
 }
 
-.following-category-head {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    align-content: space-evenly;    
-}
