@@ -9,11 +9,11 @@
                         {{loop.index}}  
                         {{food.name}}  
                         {% if food.like == 1 %}       
-                        <label><input name="{{food.id}}" type="radio" value="t" checked>호</label>
-                        <label><input name="{{food.id}}" type="radio" value="f">불호</label>
+                            <label><input name="{{food.id}}" type="radio" value="t" checked>호</label>
+                            <label><input name="{{food.id}}" type="radio" value="f">불호</label>
                         {% else %}
-                        <label><input name="{{food.id}}" type="radio" value="t">호</label>
-                        <label><input name="{{food.id}}" type="radio" value="f" checked>불호</label>
+                            <label><input name="{{food.id}}" type="radio" value="t">호</label>
+                            <label><input name="{{food.id}}" type="radio" value="f" checked>불호</label>
                         {% endif %}
                     </div>
                 {% endif %}

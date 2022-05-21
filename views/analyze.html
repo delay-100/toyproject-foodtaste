@@ -8,15 +8,16 @@
             {% for following in user.Followings %} 
                 <div id="followings-row">                  
                     <label class="container">
-                    <input type="checkbox" name="{{following.localId}}">
+                    <input type="checkbox" value="{{following.id}}" name="followings-checkedid">
                     {{following.nick}}
                     {{"("+following.localId+")"}}
                     <span class="checkmark"></span>
                     </label>
                 </div>
-            {% endfor %}
+            {% endfor %}        
+            <button id="followings-analyze-button" onClick='analyzeSelect()' class="btn">분석하기</button>
+            <div id='result'></div>
         {% endif %}
-        <button></button>
     </div>
 </div>
 {% endblock %}
@@ -24,6 +25,28 @@
 
 {% block script %}
     <script>
+        async function analyzeSelect(){
+            const query = 'input[name="followings-checkedid"]:checked';
+            const selectedEls =  document.querySelectorAll(query);
+            // 선택된 목록에서 value 찾기
+            let result = [];
+            selectedEls.forEach((el) => {
+                result.push(el.value);
+            });
+            // 출력
+            document.getElementById('result').innerText = result;
 
+            
+            await axios.post(`/analyze/analyzeSelected`, {
+                result,
+            }).then((res)=> {
+              if(res.data.status==="true"){
+                   location.reload();
+               }
+            }).catch(e => {
+            console.log(e);
+        });
+            
+        }
     </script>
 {% endblock %}    
