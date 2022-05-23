@@ -17,7 +17,9 @@ router.post('/analyzeSelected', isLoggedIn, async (req, res, next) => {
         
 
         let map = {};
-        console.log(result.length);
+        console.log("-------------");
+        console.log(result);
+        console.log("-------------");
         // 로그인한 사용자
         // for(let i=0; i<result.length)
         // map.push(i:); 
