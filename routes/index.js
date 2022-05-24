@@ -22,8 +22,6 @@ router.get('/', async (req, res, next) => {
     let how = 0;
     if(howmanyId) 
       how = howmanyId.id;
-    else
-      how = 0;  
     res.render('index', { title: '너의 취향은?', num: how});
 });
 
