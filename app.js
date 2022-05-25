@@ -6,7 +6,6 @@ const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
-const webSocket = require('./socket'); // 웹 
 
 dotenv.config();
 
@@ -89,9 +88,6 @@ app.use((err, req, res, next) => {
     res.render('error'); 
 });
     
-// 웹 소켓을 express에 연결
-const server = app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
 });
-
-webSocket(server);

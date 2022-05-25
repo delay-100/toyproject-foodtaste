@@ -5,18 +5,20 @@
     같이 밥 먹을 사람을 체크해주세요!
     <div class="followings-check">
         {% if user.Followings %} 
-            {% for following in user.Followings %} 
-                <div id="followings-row">                  
-                    <label class="container">
-                    <input type="checkbox" value="{{following.id}}" name="followings-checkedid">
-                    {{following.nick}}
-                    {{"("+following.localId+")"}}
-                    <span class="checkmark"></span>
-                    </label>
-                </div>
-            {% endfor %}        
-            <button id="followings-analyze-button" onClick='analyzeSelect()' class="btn">분석하기</button>
-            <div id='result'></div>
+            <form id='food-form' action='/analyze/result' method='post'> 
+                {% for following in user.Followings %} 
+                    <div id="followings-row">                  
+                        <label class="container">
+                        <input type="checkbox" value="{{following.id}}" name="followings-checkedid">
+                        {{following.nick}}
+                        {{"("+following.localId+")"}}
+                        <span class="checkmark"></span>
+                        </label>
+                    </div>
+                {% endfor %}        
+                <a id="followings-analyze-button" href="analyze/result" class="btn">분석하기</a>
+                <div id='result'></div>
+            </form>
         {% endif %}
     </div>
 </div>
@@ -24,14 +26,11 @@
 
 
 {% block script %}
-    <script src="/socket.io/socket.io.js"></script>
 
     <script>
-        const socket = io.connect('http://localhost:8000', { // 스크립트가 제공하는 io 객체에 서버 주소를 적어 연결, ws 프로토콜이 아닌 http 프로토콜 사용
-            path: '/socket.io', // 서버의 path 옵션(socket.js의 path)과 같아야 통신 가능
-        });
             
-        async function analyzeSelect(){
+            
+        {# async function analyzeSelect() {
             const query = 'input[name="followings-checkedid"]:checked';
             const selectedEls =  document.querySelectorAll(query);
             // 선택된 목록에서 value 찾기
@@ -41,12 +40,17 @@
             });
             // 출력
             document.getElementById('result').innerText = result;
-
-            socket.on('news', function (data) { // news 이벤트를 받기 위해 news 이벤트 리스너를 붙힘
-                console.log(data);
-                socket.emit('reply', result); // reply 이벤트 리스너로 답장 보냄
+            
+            await axios.post(`/analyze/analyzeSelected`, {
+                result,
+            }).then((res)=> {
+              if(res.data.status==="true"){
+                location.reload();
+            }
+            }).catch(e => {
+                console.log(e);
             });
             
-        }
+        } #}
     </script>
 {% endblock %}    
