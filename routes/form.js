@@ -55,7 +55,9 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         // console.log("=========================");
         // console.log(parseInt(list[i],10));
         // console.log(typeof(parseInt(list[i],10)));
+        // console.log("==============");
         // console.log(valuelist[z]);
+        // console.log("==============");
   
         const isExist = await Select.findOne({
           raw: true,
@@ -141,7 +143,12 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
       });
 
       for(let i=0; i<foods.length; i++){
-        foods[i].like = Selects[i].like;
+        for(let j=0; j<Selects.length; j++){
+          if(foods[i].id==Selects[j].foodSelected){
+            foods[i].like = Selects[j].like;
+            break;
+          }
+        }
       }
       console.log(foods);
       res.render('form', { title: '호불호 선택 폼', foodlist: foods, category: foods[0].categoryname });

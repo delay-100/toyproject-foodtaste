@@ -59,6 +59,8 @@ body {
     border-collapse: collapse;
     min-width: 152px;
     background-color: #EEEEEE;
+    /* display: table-cell; */
+
 }
 
 .islike {
@@ -77,12 +79,19 @@ body {
 
 .form-myfoodSelect {
     display: flex;
+    
+    /* display: table; */
+    table-layout: fixed;
+    width: 100%; 
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
     align-content: space-evenly;
     margin-bottom: 5%;
+/*     
+    margin-right: 10%;
+    margin-left: 10%; */
 }
 
 .food-info {
@@ -156,7 +165,6 @@ body {
 }
 
 tr {
-
     display: table;
     table-layout: fixed;
     width: 100%; 
