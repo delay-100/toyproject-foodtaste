@@ -73,10 +73,10 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
                     userSelected: parseInt(list[i], 10),
                 },
                 order: [["foodSelected", "ASC"]],
-            });
+            }); 
             let a=0;
             for(let j=0; j<foods.length; j++){
-                if(a==followings[i].length){
+                if((followings[i]!=undefined)&& (a==followings[i].length)){
                     break;
                 }
                 else{
@@ -91,17 +91,34 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             }
         }
 
+
         // console.log(food);
 
         // 로그인한 사용자
         // for(let i=0; i<result.length)
         // map.push(i:); 
 
-        const selects = await Select.findAll({
-            raw: true,
-        });
+        let nick = [];
 
-        res.render('analyzeresult', {title: '결과', foodSelectlist: foods});
+        const nicktmp = await User.findOne({
+                raw: true,
+                id: userid,
+        }); 
+
+        nick[0] = nicktmp.nick;
+
+        for(let i=0; i<list.length; i++){
+            const nicktemp = await User.findOne({
+                raw: true,
+                where: {
+                    id: parseInt(list[i]),
+                },
+            });
+            nick[i+1] = nicktemp.nick;
+        }
+
+
+        res.render('analyzeresult', {title: '결과', foodSelectlist: foods, nicklist : nick});
     } catch(err){
         console.error(err);
     }
