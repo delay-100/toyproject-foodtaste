@@ -17,6 +17,10 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
         const valuelist = Object.values(req.body).toString(); // value=following.id"
         const userid = req.user.id;
 
+        if(valuelist==""){
+            return  res.redirect('/analyze');
+
+        }
         const list = [];
         let j = 0;
         let num = "";
