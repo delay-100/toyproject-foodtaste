@@ -4,10 +4,13 @@
     font-weight: normal;
     font-style: normal;
 }
-
+html {
+    background-color: rgb(255, 255, 128);  
+}
 body {
     font-family: 'SEBANG_Gothic_Regular';
     font-size: small;
+
 }
 
 .food-form {
