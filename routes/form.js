@@ -24,10 +24,12 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
   
   router.post('/save', isLoggedIn, async (req, res, next) => {// upload2.none(): 데이터 형식이 multipart지만 이미지 데이터가 들어있지 않으므로 none 메서드 사용(이미지 주소가 온 것이고 데이터는 이미 POST /post/img 라우터에 저장됨)
     try {
-      const keylist = Object.keys(req.body).toString()
-      const valuelist = Object.values(req.body).toString();
+      const keylist = Object.keys(req.body).toString(); // name={{food.id}}
+      const valuelist = Object.values(req.body).toString(); // value="t"/"f"
   
+      // console.log("-----------------------");
       // console.log(keylist);
+      // console.log("-----------------------");
       // console.log(valuelist);
       const list = [];
       let j = 0;
@@ -40,6 +42,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         }
         else{
           num += keylist[i];
+          // console.log(num);
         }
       }
       list[j] = num;
@@ -49,7 +52,9 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
 
       let z = 0;
       for(let i=0; i<list.length; i++) {
+        // console.log("=========================");
         // console.log(parseInt(list[i],10));
+        // console.log(typeof(parseInt(list[i],10)));
         // console.log(valuelist[z]);
   
         const isExist = await Select.findOne({
