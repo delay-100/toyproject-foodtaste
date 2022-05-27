@@ -9,8 +9,63 @@
 :root {
   --button-color: #ffffff;
   --button-bg-color: #393E46;
-  --button-hover-bg-color: #025ce2;
+  --button-hover-bg-color: #393E46;
 }
+
+
+html {
+    background-color: #FFD369;
+}
+
+/* head {
+    background-color: #EEEEEE;
+}
+
+footer {
+    background-color: #EEEEEE;    
+} */
+
+body {
+    font-family: 'SEBANG_Gothic_Regular';
+    /* font-size: small; */
+}
+
+
+.input-text {
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+.mypageSetting {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    /* overflow:hidden; */
+    /* width: auto;
+    height: auto; */
+    /* display:inline-block; */
+    float: right;
+    margin-top: 1%;
+    margin-right: 3%;
+    border: 2px dashed black;
+}
+
+.user-name {  
+    float: right;
+}
+
+/* #setting {
+    float: right;
+    position: static;
+    top: 100px; 
+    right: 100px;
+} */
 
 .btn {
   -webkit-appearance: none;
@@ -24,7 +79,7 @@
   padding: 0.5rem 1rem;
   
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 1rem;
+  font-size: normal;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
@@ -42,14 +97,17 @@
   transition: 0.5s;
 }
 
-html {
-    background-color: #FFD369;
+#following-info {
+    overflow: auto;
 }
-body {
-    font-family: 'SEBANG_Gothic_Regular';
-    font-size: small;
 
+#following-percent-text-sum {
+    background-color: #393E46;
+    color: #EEEEEE;
+    /* border-top: #FFFFFF; */
+    /* border-bottom: #FFFFFF; */
 }
+
 
 .food-form {
     border: 1px solid black;
@@ -58,7 +116,8 @@ body {
     padding: 2%;
     border-collapse: collapse;
     min-width: 152px;
-    background-color: #EEEEEE;
+    /* background-color: #EEEEEE; */
+    background-color: #ffffff;
     /* display: table-cell; */
 
 }
@@ -66,15 +125,65 @@ body {
 .islike {
     display: inline;
     float: right;
+    padding-left: 1px;
+    padding-right: 1px;
+    /* border: solid; */
+    
+    /* border-style: dashed; */
+    padding-left: 1px;
+    padding-right: 1px;
+    border-color: green;
+    background-color: #C0EDA6;
 }
 
 .isdislike {
     display: inline;
     float: right;
+    
+    padding: 1px;
+    /* border: solid; */
+
+    /* border-style: dashed; */
+    border-radius: 1px;
+    border-color: red;
+    background-color: #FFA8A8;
 }
+
+
 
 #form-remove {
     border: 1px solid black;
+}
+
+#anaylze-comment {
+    color: red;
+}
+
+.text-div {
+    left: 50%;
+    top: 50%;
+    border: 1px solid black;
+    /* display:inline-block; */
+    text-align: center;
+    /* margin-top: 10%; */
+    min-width: 207px;
+    
+    /* clear:both;
+    float:left; */
+}
+.text-div-textlist {
+    
+    min-width: 207px;
+    /* text-align: center;
+    clear:both;
+    float:left; */
+}
+
+.text-div-text {
+    display: inline-block;
+    /* text-align: center;
+    clear:both;
+    float:left; */
 }
 
 .form-myfoodSelect {
@@ -99,36 +208,26 @@ body {
 }
 
 .food-info-text {
-    font-size: large;
+    font-size: x-large;
+    border-radius: 1em;
     margin-bottom: 5%;
     text-align: center;
+    background-color: #FFAB76;
 }
 
-.food-info-set {
+/* .food-info-set {
     text-align: right;
-}
+} */
 
-.mypageSetting {
-    border: 1px solid black;
-}
+
 
 #info {
     float: right;
 }
 
-#setting {
-    float: right;
-}
-
 .mypage-main {
-    margin-top: 10%;
+    margin-top: 2%;
     display: block;
-}
-
-#setting {
-    position: static;
-    top: 100px; 
-    right: 100px;
 }
 
 .pick-text {
@@ -138,7 +237,7 @@ body {
     font-weight: bolder;
     /* min-width: 207px; */
     clear:both;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
 
 }
 
@@ -148,18 +247,19 @@ body {
     margin:auto;
 }
 
-/* .follower-list-small-div {
 
-} */
+.food-name-raw {
+    padding: 3px;
+}
 
 .follower-list {
     border-collapse: collapse;
     min-width: 200px;
-    background-color : #EEEEEE; 
+    background-color : #ffffff; 
     /* border-radius: 5px; */
     /* border-style: hidden; */
     /* box-shadow: 0 0 0 1px #000; */
-    margin-top: 5%; 
+    margin-top: 2%; 
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -171,9 +271,18 @@ tr {
     /* display: flex; */
 }
 
+thead {
+    font-size: large;
+}
 th {
     display: table-cell;
+    /* font-size: large; */
+    background-color: #EEEEEE;
     /* flex: 1; */
+}
+
+.following-category-head {
+    font-size: large;
 }
 .follower-list th, .follower-list td {
       padding: 10px;
@@ -182,6 +291,18 @@ th {
 }
 
 @media (max-width: 605px) {
+
+    .following-percent-text {
+        background-color: #FFFFFF;
+    }
+
+    #following-info {
+        background-color : #EEEEEE;
+    }
+    .follower-list {
+        display: center;
+    }
+    
     .follower-list thead { 
         display: none;
     }
@@ -201,12 +322,17 @@ th {
         font-weight: bold;
     }
 
-    .follower-list td:nth-of-type(1):before { content: "[한식]"; }
-    .follower-list td:nth-of-type(2):before { content: "[중식]"; }
-    .follower-list td:nth-of-type(3):before { content: "[일식]"; }
-    .follower-list td:nth-of-type(4):before { content: "[양식]"; }
-    .follower-list td:nth-of-type(5):before { content: "[호불호]"; }
-    .follower-list td:nth-of-type(6):before { content: "[전체]"; }
+    .following-percent-div {
+        border-width: 1em;
+    }
+
+    .follower-list td:nth-of-type(1):before { content: "한식"; }
+    .follower-list td:nth-of-type(2):before { content: "중식"; }
+    .follower-list td:nth-of-type(3):before { content: "일식"; }
+    .follower-list td:nth-of-type(4):before { content: "양식"; }
+    .follower-list td:nth-of-type(5):before { content: "호불호"; }
+    .follower-list td:nth-of-type(6):before { content: "전체"; }
+
 
 }
 

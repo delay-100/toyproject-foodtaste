@@ -7,8 +7,11 @@
         <h2>팔로잉 목록</h2>
         {% if user.Followings %} 
             {% for following in user.Followings %} 
+            <div class="">
                 <div>{{following.nick}}</div>
+                <div>({{following.localId}})</div>
                 <div id="unfollow" onClick='removeFollowing({{following.id}})' class="btn">팔로잉 끊기</div>
+            </div>
             {% endfor %}
         {% endif %}
         </div>
@@ -17,6 +20,8 @@
             {% if user.Followers %} 
             {% for follower in user.Followers %} 
             <div>{{follower.nick}}</div>
+            <div>({{follower.localId}})</div>
+            
             {% endfor %} 
             {% endif %} 
         </div>

@@ -62,6 +62,7 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             }
             else{
                 if(myselects[j].foodSelected==foods[i].id){
+                    console.log(myselects[j].like);
                     foods[i].userlike = myselects[j].like;
                     j++;
                 }
@@ -78,6 +79,7 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
                 },
                 order: [["foodSelected", "ASC"]],
             }); 
+            
             let a=0;
             for(let j=0; j<foods.length; j++){
                 if((followings[i]!=undefined)&& (a==followings[i].length)){
@@ -106,8 +108,12 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
 
         const nicktmp = await User.findOne({
                 raw: true,
-                id: userid,
+                where: {
+                    id: userid,
+                },
         }); 
+
+        console.log(nicktmp);
 
         nick[0] = nicktmp.nick;
 
@@ -120,7 +126,8 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             });
             nick[i+1] = nicktemp.nick;
         }
-
+        for(let i=0; i<nick.length; i++)
+            console.log(nick[i]);
 
         res.render('analyzeresult', {title: '결과', foodSelectlist: foods, nicklist : nick});
     } catch(err){

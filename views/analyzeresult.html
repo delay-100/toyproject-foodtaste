@@ -4,22 +4,31 @@
 
     <div class="mypage-main">
 
-        {% if nicklist %}
-        <div>
-            {% for nick in nicklist %}
-                <div>
-                    {{nick}}                        
-                </div>
-            {% endfor %}
-            님의 호/불호 결과입니다!
-            *미 체크 항목은 "호"로 분류됩니다!
+        <div class="text-div">
+            {% if nicklist %}
+            <div class="text-div-textlist">
+                {% for nick in nicklist %}
+                    <div class="text-div-text">
+                        <strong>[{{nick}}]</strong>                       
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>    
+
+            <div class="text-div-textlist">
+                님의 호/불호 결과입니다!
+            </div>
+            <div class="text-div-textlist" id="anaylze-comment">
+                *한 명이라도 호/불호 미선택 시 결과가 올바르지 않게 나올 수 있습니다.
+                *꼭 모두가 선택해주세요!!
+            </div>
+            <a href="/analyze" class="btn">다시하기</a>
         </div>
-        {% endif %}
 
         <div class="pick-text" id="mypick">호</div>
         <div class="form-myfoodSelect"> 
             <div class="food-form" id="koreanfood-form"> 
-                <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">[ 한식 ]</div>
+                <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">한식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 and foodSelect.userlike == 1 %}
@@ -31,7 +40,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="chinesefood-form"> 
-                <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">[ 중식 ]</div>
+                <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">중식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 and foodSelect.userlike == 1 %}
@@ -43,7 +52,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="japanesefood-form"> 
-                <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">[ 일식 ]</div>
+                <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">일식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 and foodSelect.userlike == 1 %}
@@ -55,7 +64,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="westernfood-form"> 
-                <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">[ 양식 ]</div>
+                <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">양식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 and foodSelect.userlike == 1 %}
@@ -67,7 +76,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="likedislike-form">
-                <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">[ 호불호 ]</div>
+                <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">호불호</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 and foodSelect.userlike == 1 %}
@@ -82,7 +91,7 @@
         <div class="pick-text" id="mypick">불호</div>
         <div class="form-myfoodSelect"> 
             <div class="food-form" id="koreanfood-form"> 
-                <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">[ 한식 ]</div>
+                <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">한식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 and foodSelect.userlike == 0 %}
@@ -94,7 +103,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="chinesefood-form"> 
-                <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">[ 중식 ]</div>
+                <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">중식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 and foodSelect.userlike == 0 %}
@@ -106,7 +115,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="japanesefood-form"> 
-                <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">[ 일식 ]</div>
+                <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">일식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 and foodSelect.userlike == 0 %}
@@ -118,7 +127,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="westernfood-form"> 
-                <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">[ 양식 ]</div>
+                <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">양식</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 and foodSelect.userlike == 0 %}
@@ -130,7 +139,7 @@
                 {% endfor %}
             </div>
             <div class="food-form" id="likedislike-form">
-                <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">[ 호불호 ]</div>
+                <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">호불호</div>
                 </div>
                 {% for foodSelect in foodSelectlist %}
                     {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 and foodSelect.userlike == 0 %}

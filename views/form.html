@@ -8,7 +8,6 @@
                     <div>
                         {{loop.index}}  
                         {{food.name}}  
-                        {{food.like}}
                         {% if food.like == 0 %}       
                             <label><input name="{{food.id}}" type="radio" value="t">호</label>
                             <label><input name="{{food.id}}" type="radio" value="f" checked>불호</label>
