@@ -109,11 +109,11 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
         const nicktmp = await User.findOne({
                 raw: true,
                 where: {
-                    id: userid,
+                        id: userid,
                 },
         }); 
 
-        console.log(nicktmp);
+        // console.log(nicktmp);
 
         nick[0] = nicktmp.nick;
 
@@ -126,8 +126,8 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             });
             nick[i+1] = nicktemp.nick;
         }
-        for(let i=0; i<nick.length; i++)
-            console.log(nick[i]);
+        // for(let i=0; i<nick.length; i++)
+        //     console.log(nick[i]);
 
         res.render('analyzeresult', {title: '결과', foodSelectlist: foods, nicklist : nick});
     } catch(err){
