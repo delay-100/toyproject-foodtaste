@@ -35,6 +35,11 @@ body {
     /* font-size: small; */
 }
 
+footer {
+    margin-top: 10%;
+    text-align: center;
+    color: #7F8487;
+}
 
 .input-text {
     width: 200px;
@@ -47,7 +52,7 @@ body {
     background-color: rgb(233, 233, 233);
 }
 
-.mypageSetting {
+.mypageSetting, #login-form {
     background-color: #ffffff;
     border-radius: 1em;
     padding: 1.5%;
@@ -58,7 +63,70 @@ body {
     float: right;
     margin-top: 1%;
     margin-right: 3%;
+    margin-bottom: 3%;
     border: 2px dashed black;
+}
+
+.timeline {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    clear:both;
+    margin: 4%;
+    /* display: flex; */
+    /* border: 2px dashed black;    */
+}
+
+#following-half-text {
+    margin-bottom: 2%;
+}
+
+.num-count {
+    font-size: x-large;
+    margin-bottom: 10%;
+}
+
+.timeline-join {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    clear:both;
+    margin: 4%;
+    /* display: flex; */
+    /* padding: 5%; */
+    display: fit-content;
+}
+
+.follow-half {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    display: block;
+    /* margin: 3%; */
+    border: 2px dashed black;
+    margin: auto;
+}
+
+.timeline-ment {
+    text-align: center;
+    font-size: x-large;
+}
+
+.follow-text {
+    font-size: x-large;
+    border-radius: 1em;
+    margin-bottom: 2%;
+    text-align: center;
+    background-color: #FFAB76;
+}
+
+.following-member-setting {
+    margin-bottom: 1%;
+}
+
+
+#join-btn {
+    float: right;
 }
 
 .user-name {  
@@ -72,7 +140,13 @@ body {
     right: 100px;
 } */
 
+#show {
+    background-color: #FFAB76;
+    color: black;
+}
+
 .btn {
+  display: flex;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -160,25 +234,27 @@ body {
     border: 1px solid black;
 }
 
-#anaylze-comment {
+#analyze-comment {
     color: red;
 }
 
 .text-div {
     left: 50%;
     top: 50%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* display:inline-block; */
     text-align: center;
     /* margin-top: 10%; */
     min-width: 207px;
-    
+    clear:both;
+    margin-top: 3%;
     /* clear:both;
     float:left; */
 }
 .text-div-textlist {
     
     min-width: 207px;
+    margin-bottom: 1%;
     /* text-align: center;
     clear:both;
     float:left; */
@@ -186,6 +262,8 @@ body {
 
 .text-div-text {
     display: inline-block;
+    font-size: large;
+    /* color: #242F9B; */
     /* text-align: center;
     clear:both;
     float:left; */
@@ -345,8 +423,30 @@ th {
     text-align: center; 
     width:fit-content;
     margin:auto;
+    clear:both;
+    margin-top: 2%;
 }
 
 #followings-row {
     text-align: left;
 }
+
+.main-text {
+    text-align: center; 
+    width:fit-content; 
+    margin:auto;
+    clear:both;
+    padding-top: 5%;
+    /* background-image: url(memo.png); */
+}
+
+.followings-check {
+    margin-top: 5%;
+}
+
+.main-text-innerdiv {
+    margin-bottom: 5%;
+}
+
+
+

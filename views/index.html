@@ -1,26 +1,29 @@
 {% extends 'layout.html' %} 
 
 {% block content %}
-    <div class="num-count">
-    {{num}}명이 서비스를 이용하고 있어요!
-    </div>
-
-    <div>
-        점심/저녁을 고를 때, 
-
-        <div>
-            "아...! 나 이 메뉴는 싫은데.."
-            '눈치보여 말하긴 힘들어ㅠㅠ'
+    <div class="main-text">
+        <div class="num-count">
+        {{num}}명이 서비스를 이용하고 있어요!
         </div>
+        <div class="main-text-innerdiv">
+            <div style="color:#242F9B; display:inline;">점심/저녁</div>을 고를 때, 
+            <br><br>
+            <div>
+                "아...! 나 이 메뉴는 싫은데.."           
+            </div>
+            <div>
+                '눈치보여 말하긴 힘들어ㅠㅠ'
+            </div>
+            <br>
+            모두가 만족하는 음식! <br>  
+            <div style="color:red; display:inline;">120가지</div> 중 하나는 있지 않을까?
 
-        모두가 만족하는 음식! 120가지 중 하나는 있지 않을까?
-
+        </div>
+        {% if user and user.localId %}
+            <a id="mypage" href="/mypage" class="btn">메뉴 선택하러가기</a>
+            <a id="analyze-button" href="/analyze" class="btn">친구야 밥 먹자</a> 
+        {% endif %}
     </div>
-    {% if user and user.localId %}
-        <a id="mypage" href="/mypage" class="btn">메뉴 선택하러가기</a>
-        <a id="analyze-button" href="/analyze" class="btn">저녁 뭐먹지?</a> 
-
-    {% endif %}
 {% endblock %}
 
 

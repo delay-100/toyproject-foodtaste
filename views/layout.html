@@ -21,9 +21,9 @@
                         <button id="twit-btn" type="submit" class="btn">닉네임 변경</button> {# type이 submit이면 form의 action의 주소가 실행됨 #}
                     </form>
                 </div>
-                <input id="my-id" type="hidden" value="{{user.id}}">
+                <input id="my-id" type="hidden" value="{{user.localId}}">
                 <div>
-                    <input class="input-text" type="text" name="userFollow" id="followId" placeholder="아이디 입력"> {# req.query.hashtag #}
+                    <input class="input-text" type="text" name="userFollow" id="followId" placeholder="팔로우 할 아이디"> {# req.query.hashtag #}
                     <button class="btn" id="follow">팔로우</button>
                 </div>    
                 <a id="mypage" href="/mypage" class="btn">마이페이지</a> 
@@ -39,15 +39,16 @@
                     <label for="password">비밀번호</label>
                     <input class="input-text" id="password" type="password" name="password"  required>
                 </div>
-                <a id="join" href="/auth/join" class="btn">회원가입</a>
                 <button id="login" type="submit" class="btn">로그인</button>
+                <a id="join" href="/auth/join" class="btn">회원가입</a>
             </form>
         {% endif %}
         {% block content %}
         {% endblock %}
         <footer>
-            Copyright(c)&nbsp;
-            <a href="https://velog.io/@delay100" target="_blank">delay100</a>
+            Copyright(c).&nbsp;
+            <a href="https://github.com/delay-100" target="_blank" style="text-decoration-line: none;">delay100</a>
+            <div class="footer-div">Contact. gitignore@kakao.com</div>
         </footer>
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -60,24 +61,23 @@
             
             document.querySelector('#follow').addEventListener('click', function(e) {
                     const myId = document.querySelector('#my-id'); // myId는 현재 로그인한 사용자, layout.html에 있는 <input id="my-id" type="hidden" value="{{user.id}}">
-                    
+            
                     if(myId){
                         const userId = document.querySelector('#followId').value;
                         if(userId !== myId.value){
                             if(confirm(userId + '님을 팔로우하시겠습니까?')){
-                                axios.post(`user/follow/${userId}`) // 입력된 아이디
+                                axios.post(`../user/follow/${userId}`) // 입력된 아이디
                             .then(() =>{
                                 location.reload();
                             })
                             .catch((err)=>{
                                 console.error(err);
                             }); 
+                            }
+                        } else{
+                            alert('본인은 팔로우 할 수 없습니다!');
                         }
                     }
-                    else{
-                        alert('본인은 팔로우 할 수 없습니다!');
-                    }
-                }
         });
 
         </script>

@@ -3,6 +3,10 @@
 {% block content %}
 <div class="analyze">
     같이 밥 먹을 사람을 체크해주세요!
+    <div class="text-div-textlist" id="analyze-comment">
+        *한 명이라도 호/불호 미선택 시 결과가 올바르지 않게 나올 수 있습니다.
+        *꼭 모두가 선택해주세요!!
+    </div>    
     <div class="followings-check">
         {% if user.Followings %} 
             <form id='food-form' action='/analyze/result' method='post'> 
