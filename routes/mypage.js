@@ -2,7 +2,6 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 const { Food, Select, User } = require('../models');
-const { sum } = require('../models/user');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
@@ -73,6 +72,14 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     for(let k=0; k<req.user.Followings.length; k++){
       const followingID = req.user.Followings[k].id;
 
+      const localId = await User.findOne({
+        raw:true,
+        where: {
+          id: followingID,
+        },
+        attributes: ['localId',],
+      });
+
       const dic = {};
       let sump = 0;
       for(let i=1; i<categorynumber+1; i++){     
@@ -94,12 +101,18 @@ router.get('/', isLoggedIn, async (req, res, next) => {
         sump += parseInt((sameNum/categorydic[i])*100);
       }
       sump = parseInt(sump/categorynumber);
+      
       // // 팔로잉 퍼센트 객체 생성
       const user = {
         id: followingID,
+        localId: localId.localId,
         categorypercent: dic, 
         sumpercent: sump,
       };
+      
+      // console.log("+==================");
+      // console.log(localId);
+      // console.log("+==================");
       // // userpercent에 팔로잉 퍼센트 객체 추가
       userpercent.push(user);
     }
@@ -109,6 +122,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     // console.log(foods);
     // console.log(userpercent);
     // foodlist: food 정보, foodSelectlist: 각 user(자신, 팔로잉, 팔로워)의 food - 선택 정보
+    // console.log(userpercent);
     // console.log(userpercent);
     res.render('mypage', { title: '마이페이지', foodSelectlist: foods, percentlist: userpercent});
   } catch (err) {

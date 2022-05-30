@@ -15,6 +15,7 @@ const userRouter = require('./routes/user');
 const mypageRouter = require('./routes/mypage');
 const formRouter = require('./routes/form');
 const analyzeRouter = require('./routes/analyze');
+const memberRouter = require('./routes/member');
 
 const { sequelize } = require('./models');
 const passportConfig = require('./passport'); // passport/index.js
@@ -72,6 +73,7 @@ app.use('/user', userRouter);
 app.use('/mypage', mypageRouter);
 app.use('/form', formRouter);
 app.use('/analyze', analyzeRouter);
+app.use('/member', memberRouter);
 
 // 라우터가 없을 때 실행 
 app.use((req,res,next)=>{
