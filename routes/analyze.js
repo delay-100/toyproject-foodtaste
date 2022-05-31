@@ -62,7 +62,7 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             }
             else{
                 if(myselects[j].foodSelected==foods[i].id){
-                    console.log(myselects[j].like);
+                    // console.log(myselects[j].like);
                     foods[i].userlike = myselects[j].like;
                     j++;
                 }

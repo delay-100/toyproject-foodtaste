@@ -13,14 +13,14 @@
                 {% for following in user.Followings %} 
                     <div id="followings-row">                  
                         <label class="container">
-                        <input type="checkbox" value="{{following.id}}" name="followings-checkedid">
+                        <input class="form-label-select" type="checkbox" value="{{following.id}}" name="followings-checkedid">
                         {{following.nick}}
                         {{"("+following.localId+")"}}
                         <span class="checkmark"></span>
                         </label>
                     </div>
                 {% endfor %}        
-                 <button id="submit-btn" type="submit" class="btn">분석하기</button> 
+                 <button id="submit-btn-analyze" type="submit" class="btn">분석하기</button> 
                 {# <a id="followings-analyze-button" href="analyze/result" class="btn">분석하기</a> #}
                 <div id='result'></div>
             </form>

@@ -3,48 +3,52 @@
 {% block content %}
     <div class="food-form-padding">
         <div class="food-form-div">
-            <div class="food-form-select-text"><strong>{{category}}</strong>
-                선택하기
+            <div class="food-form-select-textform"><strong>{{category}}</strong>
+                선택
             </div>
-            <div class="divTable minimalistBlack">
-                <div class="divTableHeading">
-                    <div class="divTableRow">
-                        <div class="divTableHead">번호</div>
-                        <div class="divTableHead">음식명</div>
-                        <div class="divTableHead">호</div>
-                        <div class="divTableHead">불호</div>
+            
+            <form id='food-form' action='/form/save' method='post'> 
+                <div class="divTable">
+                    <div class="divTableHeading">
+                        <div class="divTableRow">
+                            <div class="divTableCell" id="form-cell">번호</div>
+                            <div class="divTableCell" id="form-cell">음식명</div>
+                            <div class="divTableCell" id="form-cell">호</div>
+                            <div class="divTableCell" id="form-cell">불호</div>
+                        </div>
                     </div>
-                </div>
-                <div class="divTableBody">
-                        <form id='food-form' action='/form/save' method='post'> 
-                            {% for food in foodlist %} 
-                                {% if food and food.id %}
-                                    <div class="divTableRow">
-                                        <div class="divTableCell">{{loop.index}}</div>
-                                        <div class="divTableCell">{{food.name}} </div>  
-                                        {% if food.like == 0 %}       
-                                        <div class="divTableCell">
-                                            <label><input class="form-label" name="{{food.id}}" type="radio" value="t" >호</label>
-                                        </div>
-                                        <div class="divTableCell">
-                                            <label><input class="form-label" name="{{food.id}}" type="radio" value="f" checked>불호</label>
-                                        </div>
-                                        {% else %}
-                                        <div class="divTableCell">
-                                            <label><input class="form-label" name="{{food.id}}" type="radio" value="t" checked>호</label>
-                                        </div>
-                                        <div class="divTableCell">
-                                            <label><input class="form-label" name="{{food.id}}" type="radio" value="f">불호</label>
-                                        </div>
-                                        {% endif %}
+                    <div class="divTableBody">
+                        {% for food in foodlist %} 
+                            {% if food and food.id %}
+                                <div class="divTableRow">
+                                    <div class="divTableCell">{{loop.index}}</div>
+                                    <div class="divTableCell">{{food.name}} </div>  
+                                    {% if food.like == 0 %}       
+                                    <div class="divTableCell">
+                                        <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" >
+                                        </label>
                                     </div>
-                                {% endif %}
-                            {% endfor %}
-                            <button id="submit-btn" type="submit" class="btn">저장하기</button> 
-                        </form>
+                                    <div class="divTableCell">
+                                        <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f" checked>
+                                        </label>
+                                    </div>
+                                    {% else %}
+                                    <div class="divTableCell">
+                                        <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" checked>
+                                        </label>
+                                    </div>
+                                    <div class="divTableCell">
+                                        <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f">
+                                        </label>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
-            </div>
+                <button id="submit-btn-form" type="submit" class="btn">저장</button> 
+            </form>
         </div>
     </div>
 {% endblock %}

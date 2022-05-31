@@ -1,3 +1,11 @@
+a, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
 @font-face {
     font-family: 'SEBANG_Gothic_Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
@@ -51,7 +59,13 @@ footer {
     outline: none;
     padding-left: 10px;
     background-color: rgb(233, 233, 233);
+    clear:both;
 }
+
+#button-login, #button-join, #button-mypage, #button-follow {
+    margin-top: 4%;
+}
+
 
 .mypageSetting, #login-form {
     background-color: #ffffff;
@@ -66,6 +80,7 @@ footer {
     margin-right: 3%;
     margin-bottom: 3%;
     border: 2px dashed black;
+    min-width: 152px;
 }
 
 .timeline {
@@ -88,14 +103,13 @@ footer {
 }
 
 .timeline-join {
-    background-color: #ffffff;
-    border-radius: 1em;
-    padding: 1.5%;
+    text-align: center; 
+    width:fit-content; 
+    margin:auto;
     clear:both;
-    margin: 4%;
-    /* display: flex; */
-    /* padding: 5%; */
-    display: fit-content;
+    padding: 3%;
+    background-color: white;
+    border-radius: 1em;
 }
 
 .follow-half {
@@ -111,6 +125,7 @@ footer {
 .timeline-ment {
     text-align: center;
     font-size: x-large;
+    margin-bottom: 3%;
 }
 
 .follow-text {
@@ -125,13 +140,22 @@ footer {
     margin-bottom: 1%;
 }
 
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.join-text {
+    text-align: left;
+}
 
 #join-btn {
-    float: right;
+    text-align: center;
 }
 
 .user-name {  
     float: right;
+    font-size: large;
 }
 
 /* #setting {
@@ -144,6 +168,13 @@ footer {
 #show {
     background-color: #FFAB76;
     color: black;
+}
+
+a, button {
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .btn {
@@ -206,27 +237,25 @@ footer {
 }
 
 .food-form-div{
-    border: 1px solid black;
-    margin: auto;
-    /* flex-grow: 1; */
-    /* border-radius: 5px; */
-    padding: 2%;
-    border-collapse: collapse;
-    min-width: 152px;
-    /* background-color: #EEEEEE; */
-    background-color: #ffffff;
-    /* display: table-cell; */
-    clear:both;
 
-    width:fit-content;
+    background-color: #ffffff;
+    padding: 1.5%;
+    display: block;
+    /* margin: 3%; */
+    /* border: 2px dashed black; */
+    /* border-radius: 1em; */
+    margin: auto;
 }
 
 .food-form-padding {
     background-color: #ffffff;
+    
+    margin:auto;
     border-radius: 1em;
     padding: 1.5%;
     clear:both;
-    margin: 4%;
+    max-width: 900px;
+    text-align: center;
     /* display: flex; */
     /* border: 2px dashed black;    */
 }
@@ -235,7 +264,6 @@ footer {
     background-color: #ffffff;
     border-radius: 1em;
     padding: 1.5%;
-    padding-top: 4%;
     clear:both;
     margin: 4%;
     
@@ -270,17 +298,19 @@ footer {
     margin:auto;
 }
 
-#submit-btn {
+#submit-btn-form {
     margin-top: 5%;
+    /* float:right; */
+}
+
+
+#submit-btn-analyze {
+    margin-top: 1%;
 }
 
 .label-input {
     display:inline;
 }
-
-/* .form-label {
-    display:none;
-} */
 
 .food-form-select-text {
     padding: 3%;
@@ -292,6 +322,38 @@ footer {
     text-align: center;
     background-color: #FFAB76;
 }
+
+.food-form-select-textform {
+    padding: 1%;
+    margin-bottom: 3%;
+
+    font-size: x-large;
+    border-radius: 1em;
+    margin-bottom: 5%;
+    text-align: center;
+    background-color: #FFAB76;
+}
+
+.divTableCell-likedislike {
+    display: flex;
+    /* float: right; */
+    padding-left: 1px;
+    padding-right: 1px;
+    /* border: solid; */
+    
+    /* border-style: dashed; */
+    padding-left: 1px;
+    padding-right: 1px;
+    /* border-color: green;
+    background-color: #C0EDA6; */
+}
+
+.divTableCell-likedislike-sub {
+    float: right;
+}
+
+
+
 
 .islike {
     display: inline;
@@ -348,7 +410,7 @@ footer {
 .text-div-textlist {
     
     min-width: 207px;
-    margin-bottom: 1%;
+    margin-bottom: 3%;
     /* text-align: center;
     clear:both;
     float:left; */
@@ -409,14 +471,25 @@ footer {
 
 .pick-text {
     text-align: center;
-    padding: 2%;
+    margin: 2%;
     font-size: x-large;
     font-weight: bolder;
     /* min-width: 207px; */
     clear:both;
     margin-bottom: 1%;
+}
+
+#mypick-t {
+    padding: 1%;
+    background-color:#C0EDA6;
+}
+
+#mypick-f {
+    padding: 1%;
+    background-color:#FFAB76;
 
 }
+
 
 .follower-list-div {
     text-align: center; 
@@ -537,7 +610,51 @@ th {
     margin-bottom: 5%;
 }
 
+#form-cell {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.divTable{
+	display: table;
+	width: 100%;
+}
+
 .divTableRow {
-    display: flex;
-    width:fit-content; 
+	display: table-row;
+}
+.divTableHeading {
+	background-color: #EEEEEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+.divTableFoot {
+	background-color: #EEEEEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+.form-label-t {
+    accent-color: #C0EDA6;
+}
+
+.form-label-f {
+    accent-color: #FFA8A8;
+}
+
+.form-label-select {
+    accent-color: #C0EDA6;
+}
+
+.pick-text-ment {
+    text-align: center;
+    margin-bottom: 1%;
 }

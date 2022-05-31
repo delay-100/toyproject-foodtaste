@@ -150,7 +150,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
           }
         }
       }
-      console.log(foods);
+      // console.log(foods);
       res.render('form', { title: '호불호 선택 폼', foodlist: foods, category: foods[0].categoryname });
     } catch (err) {
       console.error(err);
