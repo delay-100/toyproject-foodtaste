@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block content %} 
-    <h1>{{message}}</h1>
+    {# <h1>{{message}}</h1>
     <h2>{{error.status}}</h2>
-    <pre>{{err.stack}}</pre>
+    <pre>{{err.stack}}</pre> #}
+    <div class="error-message">
+    잘못된 접근입니다.
+    정상 경로로 이용해주세요!
+    </div>
 {% endblock %}

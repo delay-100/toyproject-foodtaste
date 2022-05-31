@@ -9,7 +9,7 @@
     </div>    
     <div class="followings-check">
         {% if user.Followings %} 
-            <form id='food-form' action='/analyze/result' method='post'> 
+            <form class='user-select-form' action='/analyze/result' method='post'> 
                 {% for following in user.Followings %} 
                     <div id="followings-row">                  
                         <label class="container">

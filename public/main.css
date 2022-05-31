@@ -191,6 +191,7 @@ footer {
 
 .food-form {
     border: 1px solid black;
+    /* margin: auto; */
     /* flex-grow: 1; */
     /* border-radius: 5px; */
     padding: 2%;
@@ -199,7 +200,97 @@ footer {
     /* background-color: #EEEEEE; */
     background-color: #ffffff;
     /* display: table-cell; */
+    clear:both;
 
+    width:fit-content; 
+}
+
+.food-form-div{
+    border: 1px solid black;
+    margin: auto;
+    /* flex-grow: 1; */
+    /* border-radius: 5px; */
+    padding: 2%;
+    border-collapse: collapse;
+    min-width: 152px;
+    /* background-color: #EEEEEE; */
+    background-color: #ffffff;
+    /* display: table-cell; */
+    clear:both;
+
+    width:fit-content;
+}
+
+.food-form-padding {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    clear:both;
+    margin: 4%;
+    /* display: flex; */
+    /* border: 2px dashed black;    */
+}
+
+.analyze {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    padding-top: 4%;
+    clear:both;
+    margin: 4%;
+    
+    text-align: center; 
+    width:fit-content;
+    margin:auto;
+    /* margin-top: 2%; */
+}
+
+.text-div-analyzeresult {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    clear:both;
+    margin: 4%;
+    
+    text-align: center; 
+    width:fit-content;
+    margin:auto;
+    /* margin-top: 2%; */
+}
+
+.error-message {
+    background-color: #ffffff;
+    border-radius: 1em;
+    padding: 1.5%;
+    clear:both;
+    margin: 4%;
+    
+    text-align: center; 
+    width:fit-content;
+    margin:auto;
+}
+
+#submit-btn {
+    margin-top: 5%;
+}
+
+.label-input {
+    display:inline;
+}
+
+/* .form-label {
+    display:none;
+} */
+
+.food-form-select-text {
+    padding: 3%;
+    margin-bottom: 3%;
+
+    font-size: x-large;
+    border-radius: 1em;
+    margin-bottom: 5%;
+    text-align: center;
+    background-color: #FFAB76;
 }
 
 .islike {
@@ -252,6 +343,8 @@ footer {
     /* clear:both;
     float:left; */
 }
+
+
 .text-div-textlist {
     
     min-width: 207px;
@@ -420,13 +513,6 @@ th {
 
 }
 
-.analyze {
-    text-align: center; 
-    width:fit-content;
-    margin:auto;
-    clear:both;
-    margin-top: 2%;
-}
 
 #followings-row {
     text-align: left;
@@ -437,7 +523,9 @@ th {
     width:fit-content; 
     margin:auto;
     clear:both;
-    padding-top: 5%;
+    padding: 3%;
+    background-color: white;
+    border-radius: 1em;
     /* background-image: url(memo.png); */
 }
 
@@ -449,5 +537,7 @@ th {
     margin-bottom: 5%;
 }
 
-
-
+.divTableRow {
+    display: flex;
+    width:fit-content; 
+}
