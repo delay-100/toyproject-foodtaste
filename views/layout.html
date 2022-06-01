@@ -7,8 +7,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <link rel="stylesheet" href="/main.css">
     </head>
-    <body>         
-        <a href="/" class="btn">TASTEYOM</a>
+    <body>   
+        <header>
+            <a id="tasteyom-header" href="/"><strong>TASTEYOM</strong></a>
+        {# <div class="tasteyom-logo-div">      
+            <a id="tasteyom-logo" href="/"><img id="logo" src="/TASTEYOM_LOGO2.png"></a>
+        </div> #}
+        </header>
         {% if user and user.localId %}
             <div class="mypageSetting" id="setting">
                 <div class="user-name">안녕하세요 <strong>{{user.nick}}({{user.localId}})</strong>님! <a id="logout" href="/auth/logout" >로그아웃</a></div> 
@@ -44,6 +49,7 @@
             Copyright(c).&nbsp;
             <a href="https://github.com/delay-100" target="_blank" style="text-decoration-line: none;">delay100</a>
             <div class="footer-div">Contact. gitignore@kakao.com</div>
+            <div id="tmi">개발자가 한식을 좋아해서 한식이 많습니다</div>
         </footer>
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -60,7 +66,7 @@
                     if(myId){
                         const userId = document.querySelector('#followId').value;
                         if(userId !== myId.value){
-                            if(confirm(userId + '님을 팔로우하시겠습니까?')){
+                            if(confirm(userId + '님을 팔로우하시겠습니까? 아이디가 없는 경우 팔로우되지 않습니다.')){
                                 axios.post(`../user/follow/${userId}`) 
                             .then(() =>{
                                 location.reload();
