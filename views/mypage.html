@@ -244,21 +244,17 @@
                                     {% endif %}
                                 {% endfor %}
                             </tr>    
-                            {# 여기에 입력 #}
                         {% endfor %}
                     {% endif %}
                 </tbody>
             </table>
-        {# </div>     #}
     </div>
 {% endblock %}
 
 
 {% block script %}
     <script>
-        
-        {# document.getElementById("info").style.visibility="hidden";
-        document.getElementById("info").style.display="none"; #}
+
 
         async function removeSelect(selectUserid, userid, category){
            await axios.post(`/form/remove`,{

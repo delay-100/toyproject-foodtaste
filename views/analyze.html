@@ -24,7 +24,6 @@
                     </div>
                 {% endfor %}        
                  <button id="submit-btn-analyze" type="submit" class="btn">알아보기</button> 
-                {# <a id="followings-analyze-button" href="analyze/result" class="btn">분석하기</a> #}
                 <div id='result'></div>
             </form>
         {% endif %}
@@ -37,28 +36,5 @@
 
     <script>
             
-            
-        {# async function analyzeSelect() {
-            const query = 'input[name="followings-checkedid"]:checked';
-            const selectedEls =  document.querySelectorAll(query);
-            // 선택된 목록에서 value 찾기
-            let result = [];
-            selectedEls.forEach((el) => {
-                result.push(el.value);
-            });
-            // 출력
-            document.getElementById('result').innerText = result;
-            
-            await axios.post(`/analyze/analyzeSelected`, {
-                result,
-            }).then((res)=> {
-              if(res.data.status==="true"){
-                location.reload();
-            }
-            }).catch(e => {
-                console.log(e);
-            });
-            
-        } #}
     </script>
 {% endblock %}    

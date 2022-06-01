@@ -101,13 +101,6 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             }
         }
 
-
-        // console.log(food);
-
-        // 로그인한 사용자
-        // for(let i=0; i<result.length)
-        // map.push(i:); 
-
         let nick = [];
 
         const nicktmp = await User.findOne({
@@ -139,29 +132,5 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
     }
 
 });
-
-// router.get('/result', isLoggedIn, async (req, res, next) => {
-//     try{
-//         const { result }= req.body;
-        
-//         let map = {};
-//         console.log("-------------");
-//         console.log(result);
-//         console.log("-------------");
-//         // 로그인한 사용자
-//         // for(let i=0; i<result.length)
-//         // map.push(i:); 
-        
-
-
-//         const selects = await Select.findAll({
-//             raw: true,
-//           });
-
-//         res.render('analyzeresult');
-//     } catch(err){
-//         console.error(err);
-//     }
-// });
 
 module.exports = router;

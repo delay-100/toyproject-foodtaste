@@ -156,6 +156,7 @@ footer {
 .user-name {  
     float: right;
     font-size: large;
+    margin-bottom: 3%;
 }
 
 /* #setting {
@@ -615,9 +616,13 @@ th {
     margin-bottom: 5%;
 }
 
-#form {
-    float: right;
-    clear: both;
+#nick-form {
+    margin-bottom: 1%;
+}
+
+#logout {
+    color:black;
+    font-size: small;
 }
 
 #form-cell {

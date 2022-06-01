@@ -28,7 +28,7 @@
 {% block script %} 
     <script>
         window.onload = () => {
-            if(new URL(location.href).searchParams.get('error')){ // 현재 주소에서 error가 존재하면 
+            if(new URL(location.href).searchParams.get('error')){ 
                 alert('이미 존재하는 아이디입니다.');
             }
         };
