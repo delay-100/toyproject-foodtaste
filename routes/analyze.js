@@ -54,6 +54,10 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
             order: [["foodSelected", "ASC"]],
         });
 
+        for(let i=0; i<foods.length; i++){
+            foods[i].userlike = 0;
+        }
+
         j=0;
         // req.user.id 관련 넣기
         for(let i=0; i<foods.length; i++){
