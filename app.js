@@ -8,15 +8,15 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const helmet = require('helmet');
 const hpp = require('hpp');
-const redis = require('redis');
-const RedisStore = require('connect-redis')(session);
+// const redis = require('redis');
+// const RedisStore = require('connect-redis')(session);
 
 dotenv.config();
 
-const redisClient = redis.createClient({
-    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
-    password: process.env.REDIS_PASSWORD,
-});
+// const redisClient = redis.createClient({
+//     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+//     password: process.env.REDIS_PASSWORD,
+// });
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -79,7 +79,7 @@ const sessionOption = {
       httpOnly: true,
       secure: false,
     },
-    store: new RedisStore({ client: redisClient }),
+    // store: new RedisStore({ client: redisClient }),
   };
   if (process.env.NODE_ENV === 'production') {
     sessionOption.proxy = true; // HTTPS 적용을 위해 노드 서버 앞에 다른 서버를 둔 경우 TRUE를 함
