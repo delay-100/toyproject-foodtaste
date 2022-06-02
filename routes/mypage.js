@@ -124,7 +124,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     // foodlist: food 정보, foodSelectlist: 각 user(자신, 팔로잉, 팔로워)의 food - 선택 정보
     // console.log(userpercent);
     // console.log(userpercent);
-    res.render('mypage', { title: '마이페이지', foodSelectlist: foods, percentlist: userpercent});
+    res.render('mypage', { title: 'TASTEYOM : 마이페이지', foodSelectlist: foods, percentlist: userpercent});
   } catch (err) {
     console.error(err);
     next(err);
@@ -134,7 +134,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
 
 
 router.get('/follow', isLoggedIn, (req, res) => {
-    res.render('follow', { title: '팔로우, 팔로워 목록' });
+    res.render('follow', { title: 'TASTEYOM : 팔로우, 팔로워 목록' });
 });
 
 

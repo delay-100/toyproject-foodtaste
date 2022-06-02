@@ -8,7 +8,7 @@ const router = express.Router();
 
 // GET /join - 회원가입 페이지로 이동 라우터
 router.get('/join', (req, res) => {
-    res.render('join', { title: '회원 가입'});
+    res.render('join', { title: 'TASTEYOM : 회원 가입'});
 });
 
 // Post /join - 회원가입 라우터

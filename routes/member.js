@@ -41,7 +41,7 @@ router.get('/:id', async (req, res, next) => {
     
     // console.log(Selects);
 
-    res.render('member', {nick: id.nick,foodSelectlist: Selects});
+    res.render('member', { title: "TASTEYOM : 멤버", nick: id.nick,foodSelectlist: Selects});
 });
 
 

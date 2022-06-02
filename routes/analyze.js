@@ -7,7 +7,7 @@ const router = express.Router();
 // console.log('11');
 
 router.get('/', isLoggedIn, async (req, res, next) => {
-    res.render('analyze' );
+    res.render('analyze' ,{ title: 'TASTEYOM : 알아보기'});
 });
 
 router.post('/result', isLoggedIn, async (req, res, next) => {
@@ -126,7 +126,7 @@ router.post('/result', isLoggedIn, async (req, res, next) => {
         // for(let i=0; i<nick.length; i++)
         //     console.log(nick[i]);
 
-        res.render('analyzeresult', {title: '결과', foodSelectlist: foods, nicklist : nick});
+        res.render('analyzeresult', {title: 'TASTEYOM : 결과', foodSelectlist: foods, nicklist : nick});
     } catch(err){
         console.error(err);
     }
