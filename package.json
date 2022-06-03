@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start app.js -f",
+    "start": "cross-env NODE_ENV=production PORT=8080 pm2 start app.js -f",
     "dev": "nodemon app",
-    "stop": "pm2 kill"
+    "stop": "pm2 kill",
+    "reload": "npx pm2 reload all"
   },
   "repository": {
     "type": "git",
