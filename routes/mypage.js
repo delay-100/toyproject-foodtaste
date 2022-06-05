@@ -22,6 +22,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       ],
     });
 
+
     const foods = await Food.findAll({ 
       raw: true,
       order: [
@@ -118,13 +119,35 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     }
     foods.user =req.user.id;
 
+    foods.usercategory = {};
+    for(let i=1; i<categorynumber+1; i++){
+      foods.usercategory[i] = 0;
+    }
+    
+    let k=40;
+    for(let i=1; i<categorynumber+1; i++){
+      const mycategorySelect = await Select.findOne({
+        raw: true,
+        where: {
+          userSelected: req.user.id,
+          foodSelected: k,
+        }
+        });
+        console.log(mycategorySelect);
+        if(mycategorySelect!=null) {
+          foods.usercategory[i] = 1;
+        }
+        else {
+          foods.usercategory[i] = 0;  
+        }
+        k+=20;
+    }
 
     // console.log(foods);
     // console.log(userpercent);
     // foodlist: food 정보, foodSelectlist: 각 user(자신, 팔로잉, 팔로워)의 food - 선택 정보
     // console.log(userpercent);
-    // console.log(userpercent);
-    // console.log(foods[0]);
+    // console.log(foods.usercategory);
     res.render('mypage', { title: 'TASTEYOM : 마이페이지', foodSelectlist: foods, percentlist: userpercent});
   } catch (err) {
     console.error(err);
