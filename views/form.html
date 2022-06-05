@@ -17,34 +17,36 @@
                             <div class="divTableCell" id="form-cell">불호</div>
                         </div>
                     </div>
-                    <div class="divTableBody">
-                        {% for food in foodlist %} 
-                            {% if food and food.id %}
-                                <div class="divTableRow">
-                                    <div class="divTableCell">{{loop.index}}</div>
-                                    <div class="divTableCell">{{food.name}} </div>  
-                                    {% if food.like == 0 %}       
-                                    <div class="divTableCell">
-                                        <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" >
-                                        </label>
+                    <div class="divTableBody">                        
+                        {% if foodlist %} 
+                            {% for food in foodlist %} 
+                                {% if food and food.id %}
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">{{loop.index}}</div>
+                                        <div class="divTableCell">{{food.name}} </div>  
+                                        {% if food.like == 0 %}       
+                                        <div class="divTableCell">
+                                            <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" >
+                                            </label>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f" checked>
+                                            </label>
+                                        </div>
+                                        {% else %}
+                                        <div class="divTableCell">
+                                            <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" checked>
+                                            </label>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f">
+                                            </label>
+                                        </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="divTableCell">
-                                        <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f" checked>
-                                        </label>
-                                    </div>
-                                    {% else %}
-                                    <div class="divTableCell">
-                                        <label><input class="form-label-t" name="{{food.id}}" type="radio" value="t" checked>
-                                        </label>
-                                    </div>
-                                    <div class="divTableCell">
-                                        <label><input class="form-label-f" name="{{food.id}}" type="radio" value="f">
-                                        </label>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 <button id="submit-btn-form" type="submit" class="btn">저장</button> 

@@ -9,107 +9,111 @@
             <div class="food-form" id="koreanfood-form"> 
                 <div class="food-info"> <div class ="food-info-text" id="koreanfood-info">한식</div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if foodSelect.like == 1 %}
-                                <div class="islike">
-                                    호
-                                </div>
-                            {% else %}
-                                <div class="isdislike">
-                                    불호
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                          
+                {% if foodSelectlist %} 
+                    {% for foodSelect in foodSelectlist %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
+                            <div class="food-name-raw">
+                                {{loop.index}}  
+                                {{foodSelect.name}}
+                                {% if foodSelect.like == 1 %}
+                                    <div class="islike">
+                                        호
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        불호
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
             </div>
             <div class="food-form" id="chinesefood-form"> 
                 <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">중식</div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if foodSelect.userlike == 1 %}
-                                <div class="islike">
-                                    호
-                                </div>
-                            {% else %}
-                                <div class="isdislike">
-                                    불호
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    {% for foodSelect in foodSelectlist %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 2 %}
+                            <div class="food-name-raw">
+                                {{loop.index}}  
+                                {{foodSelect.name}}
+                                {% if foodSelect.userlike == 1 %}
+                                    <div class="islike">
+                                        호
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        불호
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
             </div>
             <div class="food-form" id="japanesefood-form"> 
                 <div class="food-info"> <div  class ="food-info-text" id="japanesefood-info">일식</div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if foodSelect.like == 1 %}
-                                <div class="islike">
-                                    호
-                                </div>
-                            {% else %}
-                                <div class="isdislike">
-                                    불호
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    {% for foodSelect in foodSelectlist %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 3 %}
+                            <div class="food-name-raw">
+                                {{loop.index}}  
+                                {{foodSelect.name}}
+                                {% if foodSelect.like == 1 %}
+                                    <div class="islike">
+                                        호
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        불호
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
             </div>
             <div class="food-form" id="westernfood-form"> 
                 <div class="food-info">  <div  class ="food-info-text" id="westernfood-info">양식</div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if foodSelect.like == 1 %}
-                                <div class="islike">
-                                    호
-                                </div>
-                            {% else %}
-                                <div class="isdislike">
-                                    불호
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    {% for foodSelect in foodSelectlist %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 4 %}
+                            <div class="food-name-raw">
+                                {{loop.index}}  
+                                {{foodSelect.name}}
+                                {% if foodSelect.like == 1 %}
+                                    <div class="islike">
+                                        호
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        불호
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
             </div>
             <div class="food-form" id="likedislike-form">
                 <div class="food-info"> <div  class ="food-info-text" id="likedislike-info">호불호</div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if foodSelect.like == 1 %}
-                                <div class="islike">
-                                    호
-                                </div>
-                            {% else %}
-                                <div class="isdislike">
-                                    불호
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    {% for foodSelect in foodSelectlist %}
+                        {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 5 %}
+                            <div class="food-name-raw">
+                                {{loop.index}}  
+                                {{foodSelect.name}}
+                                {% if foodSelect.like == 1 %}
+                                    <div class="islike">
+                                        호
+                                    </div>
+                                {% else %}
+                                    <div class="isdislike">
+                                        불호
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                {% endif %} 
             </div>
         </div>
     </div>

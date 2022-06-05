@@ -133,7 +133,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
           foodSelected: k,
         }
         });
-        console.log(mycategorySelect);
+        // console.log(mycategorySelect);
         if(mycategorySelect!=null) {
           foods.usercategory[i] = 1;
         }

@@ -16,6 +16,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         order: [["createdAt", "DESC"]],
       });
       const category = foods[0].categoryname;
+      console.log(foods[0].categoryname);
       res.render('form', { title: 'TASTEYOM : 호불호 선택 폼', foodlist: foods, category});
     } catch (err) {
       console.error(err);
@@ -152,7 +153,8 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         }
       }
       // console.log(foods);
-      res.render('form', { title: 'TASTEYOM : 호불호 선택 폼', foodlist: foods, category: foods[0].categoryname });
+      const category = foods[0].categoryname;
+      res.render('form', { title: 'TASTEYOM : 호불호 선택 폼', foodlist: foods, category });
     } catch (err) {
       console.error(err);
       next(err);
