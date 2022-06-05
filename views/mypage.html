@@ -18,28 +18,28 @@
                                     <a id="form" href="/form/1" class="btn">선택하기</a>
                                 {% endif %}
                             {% endif %}
-                        {% endif %}
                     </div>
                 </div>
-                {% for foodSelect in foodSelectlist %}
-                    {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
-                        <div class="food-name-raw">
-                            {{loop.index}}  
-                            {{foodSelect.name}}
-                            {% if (user.id).toString() in foodSelect.userlike %}
-                                {% if foodSelect.userlike[user.id] == 1 %}
-                                    <div class="islike">
-                                        호
-                                    </div>
-                                {% else %}
-                                    <div class="isdislike">
-                                        불호
+                            {% for foodSelect in foodSelectlist %}
+                                {% if foodSelect and foodSelect.id and foodSelect.categorynumber == 1 %}
+                                    <div class="food-name-raw">
+                                        {{loop.index}}  
+                                        {{foodSelect.name}}
+                                        {% if (user.id).toString() in foodSelect.userlike %}
+                                            {% if foodSelect.userlike[user.id] == 1 %}
+                                                <div class="islike">
+                                                    호
+                                                </div>
+                                            {% else %}
+                                                <div class="isdislike">
+                                                    불호
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
                                     </div>
                                 {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
             </div>
             <div class="food-form" id="chinesefood-form"> 
                 <div class="food-info"><div  class ="food-info-text" id="chinesefood-info">중식</div>
