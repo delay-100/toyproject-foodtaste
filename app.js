@@ -55,7 +55,7 @@ sequelize.sync({ force: false })
 if (process.env.NODE_ENV === 'production') {
     // app.enable('trust proxy');
     app.use(morgan('combined'));
-    app.use(helmet({ contentSecurityPolicy: false }));
+    // app.use(helmet({ contentSecurityPolicy: false })); -> 얘때문에 에러
     app.use(hpp());
   } else {
     app.use(morgan('dev'));
