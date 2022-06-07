@@ -13,16 +13,9 @@ router.use((req, res, next) => {
   });
 
 router.get('/', async (req, res, next) => {
-    const howmanyId = await User.findOne({
-      raw: true,
-      order: [
-        ["createdAt", "desc"]
-      ],
+    const howmanyId = await User.count({
     });
-    let how = 0;
-    if(howmanyId) 
-      how = howmanyId.id;
-    res.render('index', { title: 'TASTEYOM', num: how});
+    res.render('index', { title: 'TASTEYOM', num: howmanyId});
 });
 
 module.exports = router;

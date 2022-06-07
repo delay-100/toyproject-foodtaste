@@ -14,6 +14,8 @@ router.get('/:id', async (req, res, next) => {
         attributes: ['id','nick'],
     });
 
+    if (id){
+
     const Selects = await Select.findAll({
         raw: true,
         where:{
@@ -39,9 +41,12 @@ router.get('/:id', async (req, res, next) => {
     }
 
     
-    // console.log(Selects);
+    console.log(Selects);
 
     res.render('member', { title: "TASTEYOM : 멤버", nick: id.nick,foodSelectlist: Selects});
+    }
+    else
+        res.render('error');
 });
 
 
