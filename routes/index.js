@@ -18,4 +18,10 @@ router.get('/', async (req, res, next) => {
     res.render('index', { title: 'TASTEYOM', num: howmanyId});
 });
 
+router.get('/intro', async (req, res, next) => {
+  const howmanyId = await User.count({
+  });
+  res.render('introduce', { title: 'TASTEYOM : INTRO', num: howmanyId});
+});
+
 module.exports = router;
